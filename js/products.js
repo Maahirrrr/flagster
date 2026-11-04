@@ -19,7 +19,7 @@ window.FLAGSTER_PRODUCTS = [
   },
   {
     "id": "music",
-    "title": "MUSIC IS MY DR\u2605G Tapestry",
+    "title": "MUSIC IS MY DRUG Tapestry",
     "category": "Typography",
     "tag": "ICONIC DROP",
     "rating": 4.9,

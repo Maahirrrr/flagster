@@ -3,625 +3,490 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Shop All Tapestries — Flagster Drops Under ₹1000</title>
-  <meta name="description" content="Explore Flagster's full catalog of statement hip-hop, street, and indie wall tapestries. Fixed 50% discount at ₹500. Free shipping above ₹999.">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+  <title>Flagster · All Wall Drops</title>
+  <meta name="description" content="Browse all statement wall tapestries and album flags. Pre-installed brass eyelets. Flat ₹500.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800;900&display=swap">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    .shop-header {
-      padding: 60px var(--gutter) 30px;
+    .shop-wrap {
       max-width: 1440px;
       margin: 0 auto;
+      padding: 60px var(--gutter) 100px;
     }
-    .shop-controls {
+    .shop-header {
+      margin-bottom: 36px;
+    }
+    .shop-title {
+      font-size: clamp(30px, 3.5vw, 46px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    .shop-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+    .shop-toolbar {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
+      justify-content: space-between;
       gap: 16px;
-      margin-top: 28px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
+      margin-bottom: 36px;
+      flex-wrap: wrap;
     }
-    .search-box {
-      position: relative;
-      width: min(340px, 100%);
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
     }
-    .search-input {
-      width: 100%;
-      height: 42px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-strong);
+    .filter-tab {
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 9px 20px;
       border-radius: var(--radius-pill);
-      padding: 0 16px 0 40px;
-      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .filter-tab.is-active,
+    .filter-tab:hover {
+      background: #ffffff;
+      color: #000000;
+    }
+    .shop-search-input {
+      background: var(--bg-card);
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 12px 22px;
+      color: #ffffff;
       font-size: 14px;
       outline: none;
+      min-width: 260px;
     }
-    .search-icon {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-dim);
-    }
-    .sort-select {
-      height: 42px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-pill);
-      padding: 0 18px;
-      color: #fff;
-      font-size: 13px;
-      font-weight: 600;
-      outline: none;
-      cursor: pointer;
+
+    /* Motion entrance */
+    @media (prefers-reduced-motion: no-preference) {
+      .pdp-title, .pdp-price-row, .size-pills-row, .pdp-actions-row, .btn-buy-now, .pdp-bullet-list, .accordion-block {
+        animation: entranceFade 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Announcement Top Banner -->
+  <!-- Announcement Bar -->
   <aside class="announcement">
-    <span>Free Shipping For Order Above ₹499 and Use Code: "<strong>FLAGSTER10</strong>" For 10% off</span>
+    <span>Free shipping on orders above ₹499. Use code <strong>FLAGSTER10</strong> for 10% off.</span>
   </aside>
 
-  <!-- Sticky Navbar -->
+  <!-- Navigation -->
   <header class="nav-bar">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
-        <span>FLAGSTER</span>
-        <span class="nav-logo-tag">ORIGINALS</span>
+        <span>Flagster</span>
+        <span class="nav-logo-badge">Originals</span>
       </a>
 
       <nav class="nav-links">
         <a href="index.html" class="">Home</a>
         <a href="shop.html" class="is-active">Shop All (8)</a>
-        <a href="index.html#studio" class="">3D Cloth Studio</a>
-        <a href="faq.html" class="">How to Hang & FAQ</a>
-        <a href="contact.html" class="">Contact & Track</a>
+        <a href="faq.html" class="">How to Hang</a>
+        <a href="contact.html" class="">Track Order</a>
       </nav>
 
       <div class="nav-actions">
         <button class="nav-cart-btn" id="open-cart-btn" aria-label="Open Cart">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
           <span>Cart</span>
-          <span class="cart-pill-count" id="nav-cart-badge">0</span>
+          <span class="cart-badge" id="nav-cart-badge">0</span>
         </button>
       </div>
     </div>
   </header>
 
-
-  <div class="shop-header">
-    <span class="section-tag">Full Drop Catalog</span>
-    <h1 class="section-title">ALL WALL TAPESTRIES</h1>
-    <p class="section-sub">Browse all 8 statement flags. Premium woven canvas with 4 brass eyelets. All drops flat 50% off at ₹500.</p>
-
-    <div class="shop-controls">
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" class="search-input" id="search-input" placeholder="Search by artist, album, theme...">
-      </div>
-
-      <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-        <div class="filter-pills">
-          <button class="filter-btn is-active" data-filter="all">All (8)</button>
-          <button class="filter-btn" data-filter="Hip-Hop">Hip-Hop</button>
-          <button class="filter-btn" data-filter="Street Drip">Street Drip</button>
-          <button class="filter-btn" data-filter="Psychedelic">Psychedelic</button>
-          <button class="filter-btn" data-filter="Typography">Typography</button>
-        </div>
-
-        <select class="sort-select" id="sort-select">
-          <option value="featured">Sort: Featured</option>
-          <option value="rating">Sort: Highest Rated</option>
-          <option value="reviews">Sort: Most Reviews</option>
-          <option value="name">Sort: Alphabetical</option>
-        </select>
-      </div>
+  <main class="shop-wrap">
+    <div class="shop-header">
+      <h1 class="shop-title">All Wall Drops</h1>
+      <p class="shop-desc">Eight original tapestries. Heavyweight poly-canvas finished with corner brass eyelets.</p>
     </div>
-  </div>
 
-  <main class="section" style="padding-top: 20px;">
-    <div class="products-grid" id="shop-grid">
-      
-        <article class="product-card" data-category="Hip-Hop" data-price="500" data-title="dreamin partynextdoor cover tapestry">
-          <div class="product-media">
-            <a href="product.html?id=pnd">
-              <img src="products/dreamin-partynextdoor.jpg" alt="Dreamin PartyNextDoor Cover Tapestry" loading="lazy">
-            </a>
-            <span class="product-tag-badge">BESTSELLER</span>
-            <span class="product-discount-badge">50% OFF</span>
-          </div>
-          <div class="product-body">
-            <span class="product-cat">Hip-Hop</span>
-            <h3 class="product-name"><a href="product.html?id=pnd">Dreamin PartyNextDoor Cover Tapestry</a></h3>
-            <div class="product-rating">
-              <span>★ ★ ★ ★ ★</span>
-              <span>4.9 (184 reviews)</span>
-            </div>
-            <p class="product-desc">Iconic OVO Sound PartyNextDoor dripping typography aesthetic on premium matte black woven canvas.</p>
-            <div class="product-footer">
-              <div class="card-price">
-                <span class="card-price-sale">₹500</span>
-                <span class="card-price-mrp">₹1000</span>
-              </div>
-              <div class="card-actions">
-                <a href="product.html?id=pnd" class="card-btn-view">
-                  <span>View Details</span>
-                </a>
-                <button class="card-btn-cart" onclick="addToCart('pnd')">
-                  <span>+ Add</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </article>
-        
-        <article class="product-card" data-category="Typography" data-price="500" data-title="music is my dr★g tapestry">
-          <div class="product-media">
-            <a href="product.html?id=music">
-              <img src="products/music-is-my-drug.jpg" alt="MUSIC IS MY DR★G Tapestry" loading="lazy">
-            </a>
-            <span class="product-tag-badge">ICONIC DROP</span>
-            <span class="product-discount-badge">50% OFF</span>
-          </div>
-          <div class="product-body">
-            <span class="product-cat">Typography</span>
-            <h3 class="product-name"><a href="product.html?id=music">MUSIC IS MY DR★G Tapestry</a></h3>
-            <div class="product-rating">
-              <span>★ ★ ★ ★ ★</span>
-              <span>4.9 (342 reviews)</span>
-            </div>
-            <p class="product-desc">Heavyweight bold statement typographic wall tapestry with raw contrast and street grunge energy.</p>
-            <div class="product-footer">
-              <div class="card-price">
-                <span class="card-price-sale">₹500</span>
-                <span class="card-price-mrp">₹1000</span>
-              </div>
-              <div class="card-actions">
-                <a href="product.html?id=music" class="card-btn-view">
-                  <span>View Details</span>
-                </a>
-                <button class="card-btn-cart" onclick="addToCart('music')">
-                  <span>+ Add</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </article>
-        
-        <article class="product-card" data-category="Street Drip" data-price="500" data-title="hardstone psycho rider tapestry">
-          <div class="product-media">
-            <a href="product.html?id=hardstone">
-              <img src="products/hardstone-psycho.jpg" alt="Hardstone Psycho Rider Tapestry" loading="lazy">
-            </a>
-            <span class="product-tag-badge">HOT DROP</span>
-            <span class="product-discount-badge">50% OFF</span>
-          </div>
-          <div class="product-body">
-            <span class="product-cat">Street Drip</span>
-            <h3 class="product-name"><a href="product.html?id=hardstone">Hardstone Psycho Rider Tapestry</a></h3>
-            <div class="product-rating">
-              <span>★ ★ ★ ★ ★</span>
-              <span>4.9 (218 reviews)</span>
-            </div>
-            <p class="product-desc">Cinematic desert sunset biker aesthetic with distressed heavy-duty bandana emblem. Instant wall statement.</p>
-            <div class="product-footer">
-              <div class="card-price">
-                <span class="card-price-sale">₹500</span>
-                <span class="card-price-mrp">₹1000</span>
-              </div>
-              <div class="card-actions">
-                <a href="product.html?id=hardstone" class="card-btn-view">
-                  <span>View Details</span>
-                </a>
-                <button class="card-btn-cart" onclick="addToCart('hardstone')">
-                  <span>+ Add</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </article>
-        
-        <article class="product-card" data-category="Psychedelic" data-price="500" data-title="tame impala — currents tapestry">
-          <div class="product-media">
-            <a href="product.html?id=currents">
-              <img src="products/tame-impala-currents.jpg" alt="Tame Impala — Currents Tapestry" loading="lazy">
-            </a>
-            <span class="product-tag-badge">FAN FAVORITE</span>
-            <span class="product-discount-badge">50% OFF</span>
-          </div>
-          <div class="product-body">
-            <span class="product-cat">Psychedelic</span>
-            <h3 class="product-name"><a href="product.html?id=currents">Tame Impala — Currents Tapestry</a></h3>
-            <div class="product-rating">
-              <span>★ ★ ★ ★ ★</span>
-              <span>5.0 (420 reviews)</span>
-            </div>
-            <p class="product-desc">The legendary psychedelic fluid wave artwork with floating chrome sphere and vivid sunset beam.</p>
-            <div class="product-footer">
-              <div class="card-price">
-                <span class="card-price-sale">₹500</span>
-                <span class="card-price-mrp">₹1000</span>
-              </div>
-              <div class="card-actions">
-                <a href="product.html?id=currents" class="card-btn-view">
-                  <span>View Details</span>
-                </a>
-                <button class="card-btn-cart" onclick="addToCart('currents')">
-                  <span>+ Add</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </article>
-        
-        <article class="product-card" data-category="Hip-Hop" data-price="500" data-title="kendrick lamar — damn. tapestry">
-          <div class="product-media">
-            <a href="product.html?id=damn">
-              <img src="products/kendrick-damn.jpg" alt="Kendrick Lamar — DAMN. Tapestry" loading="lazy">
-            </a>
-            <span class="product-tag-badge">PULITZER</span>
-            <span class="product-discount-badge">50% OFF</span>
-          </div>
-          <div class="product-body">
-            <span class="product-cat">Hip-Hop</span>
-            <h3 class="product-name"><a href="product.html?id=damn">Kendrick Lamar — DAMN. Tapestry</a></h3>
-            <div class="product-rating">
-              <span>★ ★ ★ ★ ★</span>
-              <span>4.9 (295 reviews)</span>
-            </div>
-            <p class="product-desc">The Pulitzer-winning masterpiece album cover featuring Kendrick Lamar against the iconic crimson brick backdrop.</p>
-            <div class="product-footer">
-              <div class="card-price">
-                <span class="card-price-sale">₹500</span>
-                <span class="card-price-mrp">₹1000</span>
-              </div>
-              <div class="card-actions">
-                <a href="product.html?id=damn" class="card-btn-view">
-                  <span>View Details</span>
-                </a>
-                <button class="card-btn-cart" onclick="addToCart('damn')">
-                  <span>+ Add</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </article>
-        
-        <article class="product-card" data-category="Hip-Hop" data-price="500" data-title="travis scott — circus maximus tapestry">
-          <div class="product-media">
-            <a href="product.html?id=travis-utopia">
-              <img src="products/travis-utopia.jpg" alt="Travis Scott — Circus Maximus Tapestry" loading="lazy">
-            </a>
-            <span class="product-tag-badge">LIMITED</span>
-            <span class="product-discount-badge">50% OFF</span>
-          </div>
-          <div class="product-body">
-            <span class="product-cat">Hip-Hop</span>
-            <h3 class="product-name"><a href="product.html?id=travis-utopia">Travis Scott — Circus Maximus Tapestry</a></h3>
-            <div class="product-rating">
-              <span>★ ★ ★ ★ ★</span>
-              <span>4.8 (167 reviews)</span>
-            </div>
-            <p class="product-desc">Raw moody performance shot of Travis Scott reaching into the darkness under brutalist stage lighting.</p>
-            <div class="product-footer">
-              <div class="card-price">
-                <span class="card-price-sale">₹500</span>
-                <span class="card-price-mrp">₹1000</span>
-              </div>
-              <div class="card-actions">
-                <a href="product.html?id=travis-utopia" class="card-btn-view">
-                  <span>View Details</span>
-                </a>
-                <button class="card-btn-cart" onclick="addToCart('travis-utopia')">
-                  <span>+ Add</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </article>
-        
-        <article class="product-card" data-category="Hip-Hop" data-price="500" data-title="playboi carti — whole lotta red tapestry">
-          <div class="product-media">
-            <a href="product.html?id=carti">
-              <img src="products/carti-red.jpg" alt="Playboi Carti — Whole Lotta Red Tapestry" loading="lazy">
-            </a>
-            <span class="product-tag-badge">CULT CLASSIC</span>
-            <span class="product-discount-badge">50% OFF</span>
-          </div>
-          <div class="product-body">
-            <span class="product-cat">Hip-Hop</span>
-            <h3 class="product-name"><a href="product.html?id=carti">Playboi Carti — Whole Lotta Red Tapestry</a></h3>
-            <div class="product-rating">
-              <span>★ ★ ★ ★ ★</span>
-              <span>4.9 (388 reviews)</span>
-            </div>
-            <p class="product-desc">Slash punk tribute to the vampire era with dripping bloody red script on pitch obsidian cloth.</p>
-            <div class="product-footer">
-              <div class="card-price">
-                <span class="card-price-sale">₹500</span>
-                <span class="card-price-mrp">₹1000</span>
-              </div>
-              <div class="card-actions">
-                <a href="product.html?id=carti" class="card-btn-view">
-                  <span>View Details</span>
-                </a>
-                <button class="card-btn-cart" onclick="addToCart('carti')">
-                  <span>+ Add</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </article>
-        
-        <article class="product-card" data-category="Psychedelic" data-price="500" data-title="strange by design — chrome octopus tapestry">
-          <div class="product-media">
-            <a href="product.html?id=strange">
-              <img src="products/strange-by-design.jpg" alt="Strange By Design — Chrome Octopus Tapestry" loading="lazy">
-            </a>
-            <span class="product-tag-badge">ORIGINAL ARCHIVE</span>
-            <span class="product-discount-badge">50% OFF</span>
-          </div>
-          <div class="product-body">
-            <span class="product-cat">Psychedelic</span>
-            <h3 class="product-name"><a href="product.html?id=strange">Strange By Design — Chrome Octopus Tapestry</a></h3>
-            <div class="product-rating">
-              <span>★ ★ ★ ★ ★</span>
-              <span>4.9 (512 reviews)</span>
-            </div>
-            <p class="product-desc">The iconic chrome octopus liquid foil design with bold Strange By Design typography. The genesis Flagster piece.</p>
-            <div class="product-footer">
-              <div class="card-price">
-                <span class="card-price-sale">₹500</span>
-                <span class="card-price-mrp">₹1000</span>
-              </div>
-              <div class="card-actions">
-                <a href="product.html?id=strange" class="card-btn-view">
-                  <span>View Details</span>
-                </a>
-                <button class="card-btn-cart" onclick="addToCart('strange')">
-                  <span>+ Add</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </article>
-        
+    <div class="shop-toolbar">
+      <div class="filter-tabs">
+        <button class="filter-tab is-active" onclick="filterCatalog('All', this)">All (8)</button>
+        <button class="filter-tab" onclick="filterCatalog('Hip-Hop', this)">Hip-Hop</button>
+        <button class="filter-tab" onclick="filterCatalog('Street Drip', this)">Street Drip</button>
+        <button class="filter-tab" onclick="filterCatalog('Psychedelic', this)">Psychedelic</button>
+        <button class="filter-tab" onclick="filterCatalog('Typography', this)">Typography</button>
+      </div>
+
+      <input type="text" id="catalog-search" class="shop-search-input" placeholder="Search by name or artist" oninput="handleSearch(this.value)">
+    </div>
+
+    <div class="product-grid" id="catalog-grid">
+      <!-- Injected by JS -->
     </div>
   </main>
 
+  <!-- Related Wall Drops -->
+  <section class="pdp-wrap" style="padding-top: 20px;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px;">
+      <div>
+        <h2 style="font-size: 28px; font-weight: 800; color: #fff;">More Wall Drops</h2>
+        <p style="font-size: 15px; color: var(--text-muted); margin-top: 4px;">Explore more statement album flags.</p>
+      </div>
+      <a href="shop.html" class="btn-secondary" style="font-size: 14px; padding: 10px 20px;">View All</a>
+    </div>
+
+    <div class="product-grid">
+      
+      <article class="product-card">
+        <div class="product-thumb-wrap">
+          <a href="product.html?id=music">
+            <img class="product-thumb-img" src="products/music-is-my-drug.jpg" alt="MUSIC IS MY DRUG Tapestry" loading="lazy">
+          </a>
+          <span class="badge-tag">ICONIC DROP</span>
+          <span class="badge-sale">50% Off</span>
+        </div>
+        <div class="product-body">
+          <div class="product-category">Typography</div>
+          <h3 class="product-title"><a href="product.html?id=music">MUSIC IS MY DRUG Tapestry</a></h3>
+          <p class="product-desc">Heavyweight bold statement typographic wall tapestry with raw contrast and street grunge energy.</p>
+          <div class="product-footer">
+            <div>
+              <span class="price-current">₹500</span>
+              <span class="price-mrp">₹1000</span>
+            </div>
+            <div>
+              <a href="product.html?id=music" class="btn-view-drop">Details</a>
+              <button class="btn-quick-add" onclick="addToCart('music', 1, 'Medium (4x3 ft)')">Add</button>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="product-thumb-wrap">
+          <a href="product.html?id=hardstone">
+            <img class="product-thumb-img" src="products/hardstone-psycho.jpg" alt="Hardstone Psycho Rider Tapestry" loading="lazy">
+          </a>
+          <span class="badge-tag">HOT DROP</span>
+          <span class="badge-sale">50% Off</span>
+        </div>
+        <div class="product-body">
+          <div class="product-category">Street Drip</div>
+          <h3 class="product-title"><a href="product.html?id=hardstone">Hardstone Psycho Rider Tapestry</a></h3>
+          <p class="product-desc">Cinematic desert sunset biker aesthetic with distressed heavy-duty bandana emblem. Instant wall statement.</p>
+          <div class="product-footer">
+            <div>
+              <span class="price-current">₹500</span>
+              <span class="price-mrp">₹1000</span>
+            </div>
+            <div>
+              <a href="product.html?id=hardstone" class="btn-view-drop">Details</a>
+              <button class="btn-quick-add" onclick="addToCart('hardstone', 1, 'Medium (4x3 ft)')">Add</button>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="product-thumb-wrap">
+          <a href="product.html?id=currents">
+            <img class="product-thumb-img" src="products/tame-impala-currents.jpg" alt="Tame Impala — Currents Tapestry" loading="lazy">
+          </a>
+          <span class="badge-tag">FAN FAVORITE</span>
+          <span class="badge-sale">50% Off</span>
+        </div>
+        <div class="product-body">
+          <div class="product-category">Psychedelic</div>
+          <h3 class="product-title"><a href="product.html?id=currents">Tame Impala — Currents Tapestry</a></h3>
+          <p class="product-desc">The legendary psychedelic fluid wave artwork with floating chrome sphere and vivid sunset beam.</p>
+          <div class="product-footer">
+            <div>
+              <span class="price-current">₹500</span>
+              <span class="price-mrp">₹1000</span>
+            </div>
+            <div>
+              <a href="product.html?id=currents" class="btn-view-drop">Details</a>
+              <button class="btn-quick-add" onclick="addToCart('currents', 1, 'Medium (4x3 ft)')">Add</button>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="product-thumb-wrap">
+          <a href="product.html?id=damn">
+            <img class="product-thumb-img" src="products/kendrick-damn.jpg" alt="Kendrick Lamar — DAMN. Tapestry" loading="lazy">
+          </a>
+          <span class="badge-tag">PULITZER</span>
+          <span class="badge-sale">50% Off</span>
+        </div>
+        <div class="product-body">
+          <div class="product-category">Hip-Hop</div>
+          <h3 class="product-title"><a href="product.html?id=damn">Kendrick Lamar — DAMN. Tapestry</a></h3>
+          <p class="product-desc">The Pulitzer-winning masterpiece album cover featuring Kendrick Lamar against the iconic crimson brick backdrop.</p>
+          <div class="product-footer">
+            <div>
+              <span class="price-current">₹500</span>
+              <span class="price-mrp">₹1000</span>
+            </div>
+            <div>
+              <a href="product.html?id=damn" class="btn-view-drop">Details</a>
+              <button class="btn-quick-add" onclick="addToCart('damn', 1, 'Medium (4x3 ft)')">Add</button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer class="site-footer">
-    <div class="footer-top">
-      <div class="footer-col">
-        <div class="nav-logo" style="margin-bottom: 16px;">
-          <span>FLAGSTER</span>
-          <span class="nav-logo-tag">ORIGINALS</span>
-        </div>
-        <p>Premium statement wall tapestries inspired by hip-hop, street drip, and indie album art. 4 corner brass grommets, heavy micro-weave canvas, and fade-resistant thermal print. Fixed at ₹500.</p>
-        <p style="color: #6a7182; font-size: 13px;">Free shipping across India on 2+ flags.</p>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>Flagster</h4>
+        <p>Heavyweight graphic wall tapestries. Printed with fade-resistant dye sublimation and finished with four pre-installed brass corner eyelets.</p>
       </div>
 
       <div class="footer-col">
-        <h4>Navigation</h4>
-        <ul class="footer-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="shop.html">Shop All Tapestries</a></li>
-          <li><a href="index.html#studio">3D Interactive Studio</a></li>
-          <li><a href="faq.html">How to Hang Guide</a></li>
-          <li><a href="contact.html">Track My Order</a></li>
+        <h5>Catalog</h5>
+        <ul>
+          <li><a href="shop.html">All Drops</a></li>
+          <li><a href="shop.html?cat=Hip-Hop">Hip-Hop</a></li>
+          <li><a href="shop.html?cat=Street+Drip">Street Drip</a></li>
+          <li><a href="shop.html?cat=Psychedelic">Psychedelic</a></li>
+          <li><a href="shop.html?cat=Typography">Typography</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4>Customer Care</h4>
-        <ul class="footer-links">
-          <li><a href="faq.html#shipping">Shipping & Delivery</a></li>
-          <li><a href="faq.html#returns">7-Day Replacement</a></li>
-          <li><a href="faq.html#care">Washing & Care</a></li>
-          <li><a href="contact.html">WhatsApp Support</a></li>
+        <h5>Support</h5>
+        <ul>
+          <li><a href="faq.html">How to Hang Guide</a></li>
+          <li><a href="faq.html#care">Fabric Care</a></li>
+          <li><a href="faq.html#shipping">Shipping and Returns</a></li>
+          <li><a href="contact.html">Track Order</a></li>
           <li><a href="contact.html">Contact Us</a></li>
         </ul>
       </div>
 
-      <div class="footer-col">
-        <h4>VIP Drop List</h4>
-        <p>Subscribe for secret midnight drops and an instant 10% coupon.</p>
-        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Welcome to Flagster VIP! Use code FLAGSTER10 at checkout.');">
-          <input type="email" class="newsletter-input" placeholder="Your email..." required>
-          <button type="submit" class="newsletter-btn">Join</button>
+      <div class="footer-col footer-newsletter">
+        <h5>Updates</h5>
+        <p>Join for release notifications on upcoming limited wall drops.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed for drop alerts.');">
+          <input type="email" class="newsletter-input" placeholder="Your email address" required>
+          <button type="submit" class="btn-primary" style="padding: 10px 18px; font-size: 14px;">Join</button>
         </form>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <span>© 2026 FLAGSTER INC. All rights reserved.</span>
-      <span>Flat ₹500 (50% Off MRP ₹1,000) • Cash on Delivery & Fast UPI Available</span>
+      <span>2026 Flagster. All rights reserved.</span>
+      <span>Flat ₹500 per flag. Cash on delivery available across India.</span>
     </div>
   </footer>
 
-  <!-- Slide-In Cart Drawer -->
-  <div class="cart-backdrop" id="cart-backdrop">
-    <aside class="cart-drawer" role="dialog" aria-label="Shopping Cart">
-      <div class="cart-header">
-        <h3>Your Cart (<span id="cart-drawer-count">0</span>)</h3>
-        <button class="cart-close-btn" id="cart-close-btn" aria-label="Close Cart">&times;</button>
+  <!-- Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cart-drawer-overlay" onclick="closeCart()"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Shopping Cart">
+    <div class="cart-header">
+      <h3>Your Bag</h3>
+      <button class="btn-close-cart" onclick="closeCart()" aria-label="Close Bag">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="shipping-meter">
+      <div id="shipping-meter-text">Add ₹499 for free express delivery</div>
+      <div class="shipping-meter-bar-bg">
+        <div class="shipping-meter-bar-fill" id="shipping-meter-bar"></div>
+      </div>
+    </div>
+
+    <div class="cart-items-list" id="cart-items-container">
+      <!-- Injected by cart.js -->
+    </div>
+
+    <div class="cart-footer">
+      <div class="coupon-box">
+        <input type="text" id="coupon-input" class="coupon-input" placeholder="Promo code (e.g. FLAGSTER10)">
+        <button class="coupon-btn" onclick="applyCouponCode()">Apply</button>
+      </div>
+      <div id="coupon-status" style="font-size: 13px; margin-bottom: 8px;"></div>
+
+      <div class="cart-summary-line">
+        <span>Subtotal</span>
+        <span id="cart-subtotal-val">₹0</span>
+      </div>
+      <div class="cart-summary-line" id="cart-discount-row" style="display: none; color: var(--pink-accent);">
+        <span>Discount</span>
+        <span id="cart-discount-val">−₹0</span>
+      </div>
+      <div class="cart-summary-line">
+        <span>Shipping</span>
+        <span id="cart-shipping-val">Calculated at checkout</span>
+      </div>
+      <div class="cart-summary-line total">
+        <span>Total</span>
+        <span id="cart-total-val">₹0</span>
       </div>
 
-      <div class="cart-shipping-banner" id="cart-shipping-msg">
-        ⚡ Add 1 more flag to unlock FREE SHIPPING!
-      </div>
-
-      <div class="cart-items" id="cart-items-container">
-        <!-- Injected via cart.js -->
-      </div>
-
-      <div class="cart-footer">
-        <div class="cart-coupon-row">
-          <input type="text" class="cart-coupon-input" id="coupon-input" placeholder="Coupon Code (e.g. FLAGSTER10)">
-          <button class="cart-coupon-btn" onclick="applyCoupon()">Apply</button>
-        </div>
-        <div class="cart-subtotal">
-          <span>Subtotal</span>
-          <span id="cart-subtotal-val">₹0</span>
-        </div>
-        <div class="cart-subtotal" style="color: var(--green);">
-          <span>50% Drop Discount</span>
-          <span id="cart-discount-val">-₹0</span>
-        </div>
-        <div class="cart-subtotal">
-          <span>Shipping</span>
-          <span id="cart-shipping-val">₹50</span>
-        </div>
-        <div class="cart-total">
-          <span>Total</span>
-          <span id="cart-total-val">₹0</span>
-        </div>
-        <button class="cart-checkout-btn" id="cart-checkout-btn">
-          <span>Proceed to Checkout</span>
-          <span>→</span>
-        </button>
-      </div>
-    </aside>
-  </div>
+      <button class="btn-pink btn-checkout" onclick="openCheckout()">Proceed to Checkout</button>
+    </div>
+  </aside>
 
   <!-- Checkout Modal -->
-  <div class="modal-backdrop" id="checkout-modal">
-    <div class="modal-box">
-      <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+  <div class="checkout-modal-overlay" id="checkout-modal-overlay">
+    <div class="checkout-modal" role="dialog" aria-modal="true">
+      <button onclick="closeCheckout()" style="position: absolute; top: 20px; right: 24px; color: var(--text-dim); font-size: 20px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
 
       <div id="checkout-form-view">
-        <h3 class="modal-title">Fast Checkout</h3>
-        <p class="modal-sub">Fast dispatch within 24h with brass grommet mounting kit.</p>
+        <h2>Order Details</h2>
+        <p class="sub">Complete your shipping address and select payment.</p>
 
-        <form id="order-form" onsubmit="handlePlaceOrder(event)">
-          <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" class="form-input" placeholder="e.g. Aryan Sharma" required>
-          </div>
-
+        <form id="checkout-form" onsubmit="handlePlaceOrder(event)">
           <div class="form-row">
             <div class="form-group">
-              <label>Phone Number (for delivery SMS)</label>
-              <input type="tel" class="form-input" placeholder="+91 98765 43210" required>
+              <label>Full Name</label>
+              <input type="text" id="cust-name" required placeholder="Alex Turner">
             </div>
             <div class="form-group">
-              <label>PIN Code</label>
-              <input type="text" class="form-input" placeholder="e.g. 560001" required>
+              <label>Phone Number</label>
+              <input type="tel" id="cust-phone" required placeholder="+91 98765 43210">
             </div>
           </div>
 
           <div class="form-group">
             <label>Delivery Address</label>
-            <input type="text" class="form-input" placeholder="Flat, Building, Street name" required>
+            <input type="text" id="cust-address" required placeholder="Flat, Street, Area">
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label>City</label>
-              <input type="text" class="form-input" placeholder="e.g. Bengaluru" required>
+              <input type="text" id="cust-city" required placeholder="Mumbai">
             </div>
             <div class="form-group">
-              <label>State</label>
-              <input type="text" class="form-input" placeholder="e.g. Karnataka" required>
+              <label>Pincode</label>
+              <input type="text" id="cust-pin" required placeholder="400001">
             </div>
           </div>
 
           <div class="form-group">
             <label>Payment Method</label>
-            <div class="payment-options">
-              <div class="payment-option is-selected" onclick="selectPayment(this, 'cod')">
-                <div style="font-size: 20px;">💵</div>
-                <div class="payment-option-title">Cash on Delivery</div>
+            <div class="payment-selector">
+              <div class="payment-opt is-active" onclick="selectPayment(this, 'cod')">
+                <h5>Cash on Delivery</h5>
+                <span>Pay upon arrival</span>
               </div>
-              <div class="payment-option" onclick="selectPayment(this, 'upi')">
-                <div style="font-size: 20px;">📱</div>
-                <div class="payment-option-title">UPI / GPay</div>
+              <div class="payment-opt" onclick="selectPayment(this, 'upi')">
+                <h5>UPI / QR</h5>
+                <span>Instant payment</span>
               </div>
-              <div class="payment-option" onclick="selectPayment(this, 'card')">
-                <div style="font-size: 20px;">💳</div>
-                <div class="payment-option-title">Card / NetBanking</div>
+              <div class="payment-opt" onclick="selectPayment(this, 'card')">
+                <h5>Card / Netbanking</h5>
+                <span>Online transfer</span>
               </div>
             </div>
           </div>
 
-          <div class="order-summary-box">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-              <span>Total Items</span>
-              <strong id="modal-item-count">1 item</strong>
-            </div>
-            <div style="display: flex; justify-content: space-between; font-size: 16px;">
-              <span>Final Payable</span>
-              <strong style="color: #fff;" id="modal-final-total">₹500</strong>
-            </div>
-          </div>
-
-          <button type="submit" class="cart-checkout-btn" style="background: var(--accent); color: #fff;">
-            <span>Confirm Order</span>
-            <span>✓</span>
-          </button>
+          <button type="submit" class="btn-pink" style="width: 100%; margin-top: 16px;">Place Order</button>
         </form>
       </div>
 
-      <div class="success-view" id="checkout-success-view">
-        <div class="success-icon">✓</div>
-        <h3 class="modal-title">Order Confirmed!</h3>
-        <p class="modal-sub">Thank you for ordering with Flagster! We are preparing your tapestries.</p>
-        <div style="background: var(--bg-surface); padding: 18px; border-radius: 12px; margin: 20px 0; font-size: 14px; text-align: left;">
-          <p><strong>Order ID:</strong> #FLG-<span id="confirmed-order-id">82914</span></p>
-          <p style="margin-top: 6px;"><strong>Delivery Estimate:</strong> 3-4 Business Days</p>
-          <p style="margin-top: 6px; color: var(--green);"><strong>Status:</strong> Ready for Dispatch</p>
+      <div class="order-success-modal" id="checkout-success-view">
+        <div class="success-circle">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <button class="btn btn-primary" style="width: 100%;" onclick="closeCheckout()">
-          Continue Browsing
-        </button>
+        <h2>Order Confirmed</h2>
+        <p class="sub" id="order-confirm-msg">Thank you. Your order has been placed successfully.</p>
+        <p style="font-size: 15px; margin-bottom: 24px;">Order ID: <strong id="order-confirm-id" style="color: var(--pink-accent);">FLG-84920</strong></p>
+        <button class="btn-primary" onclick="closeCheckout(); window.location.href='contact.html';">Track Status</button>
       </div>
     </div>
   </div>
 
-
   <script src="js/products.js"></script>
   <script src="js/cart.js"></script>
   <script>
+    let activeFilter = 'All';
+    let searchQuery = '';
+
     document.addEventListener('DOMContentLoaded', function() {
-      const searchInput = document.getElementById('search-input');
-      const sortSelect = document.getElementById('sort-select');
-      const filterBtns = document.querySelectorAll('.filter-btn');
-      let currentFilter = 'all';
-
-      function applyFilters() {
-        const q = searchInput.value.toLowerCase().trim();
-        const cards = Array.from(document.querySelectorAll('.product-card'));
-
-        cards.forEach(card => {
-          const cat = card.dataset.category;
-          const title = card.dataset.title;
-          const matchesCat = (currentFilter === 'all' || cat === currentFilter);
-          const matchesSearch = (!q || title.includes(q) || cat.toLowerCase().includes(q));
-
-          if (matchesCat && matchesSearch) {
-            card.style.display = 'flex';
+      const params = new URLSearchParams(window.location.search);
+      const cat = params.get('cat');
+      if (cat) {
+        activeFilter = cat;
+        document.querySelectorAll('.filter-tab').forEach(b => {
+          if (b.textContent.includes(cat)) {
+            b.classList.add('is-active');
           } else {
-            card.style.display = 'none';
+            b.classList.remove('is-active');
           }
         });
       }
-
-      searchInput.addEventListener('input', applyFilters);
-
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-          filterBtns.forEach(b => b.classList.remove('is-active'));
-          this.classList.add('is-active');
-          currentFilter = this.dataset.filter;
-          applyFilters();
-        });
-      });
+      renderCatalog();
     });
+
+    function filterCatalog(category, btn) {
+      activeFilter = category;
+      document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      renderCatalog();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val.toLowerCase().trim();
+      renderCatalog();
+    }
+
+    function renderCatalog() {
+      const grid = document.getElementById('catalog-grid');
+      let items = window.FLAGSTER_PRODUCTS;
+
+      if (activeFilter !== 'All') {
+        items = items.filter(x => x.category.toLowerCase() === activeFilter.toLowerCase());
+      }
+
+      if (searchQuery) {
+        items = items.filter(x => x.title.toLowerCase().includes(searchQuery) || x.desc.toLowerCase().includes(searchQuery));
+      }
+
+      if (items.length === 0) {
+        grid.innerHTML = '<p style="color: var(--text-dim); padding: 40px 0;">No matching tapestries found.</p>';
+        return;
+      }
+
+      grid.innerHTML = items.map(p => `
+        <article class="product-card">
+          <div class="product-thumb-wrap">
+            <a href="product.html?id=${p.id}">
+              <img class="product-thumb-img" src="${p.img}" alt="${p.title}" loading="lazy">
+            </a>
+            <span class="badge-tag">${p.tag}</span>
+            <span class="badge-sale">50% Off</span>
+          </div>
+          <div class="product-body">
+            <div class="product-category">${p.category}</div>
+            <h3 class="product-title"><a href="product.html?id=${p.id}">${p.title}</a></h3>
+            <p class="product-desc">${p.desc}</p>
+            <div class="product-footer">
+              <div>
+                <span class="price-current">₹500</span>
+                <span class="price-mrp">₹1000</span>
+              </div>
+              <div>
+                <a href="product.html?id=${p.id}" class="btn-view-drop">Details</a>
+                <button class="btn-quick-add" onclick="addToCart('${p.id}', 1, 'Medium (4x3 ft)')">Add</button>
+              </div>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
   </script>
 </body>
 </html>

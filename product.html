@@ -3,42 +3,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Flagster — Tapestry Detail</title>
-  <meta name="description" content="Statement wall tapestry details, 3D interactive cloth inspection, size options, and direct purchase.">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+  <title>Flagster · Tapestry Detail</title>
+  <meta name="description" content="Tapestry details, dual photo and interactive 3D cloth physics view, and size selector.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800;900&display=swap">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    .pdp-section {
-      padding: 40px var(--gutter) 80px;
+    .pdp-wrap {
       max-width: 1440px;
       margin: 0 auto;
+      padding: 40px var(--gutter) 80px;
     }
-    .breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--text-dim);
-      margin-bottom: 24px;
-    }
-    .breadcrumb a:hover { color: #fff; }
-
-    .pdp-layout {
+    .pdp-grid {
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
       gap: 56px;
       align-items: start;
     }
 
-    /* Left: Media & 3D cloth simulator container */
     .pdp-media-card {
       position: relative;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
+      background: #000000;
+      border-radius: 16px;
       overflow: hidden;
       aspect-ratio: 1.38/1;
-      box-shadow: var(--shadow-pop);
     }
     .pdp-photo-view {
       width: 100%;
@@ -46,185 +35,146 @@
       object-fit: cover;
       display: block;
     }
-
     .pdp-3d-wrapper {
       position: absolute;
       inset: 0;
-      background: radial-gradient(120% 95% at 58% 38%, #e8e9ed 0%, var(--paper) 46%, var(--paper-edge) 100%);
+      background: #090a0d;
       display: none;
     }
     .pdp-3d-wrapper.is-active {
       display: block;
     }
-
-    .hero__cloth {
-      position: absolute;
-      inset: 0;
+    .pdp-cloth-canvas {
       width: 100%;
       height: 100%;
       display: block;
       touch-action: pan-y;
+      outline: none;
     }
-    .hero__still {
-      display: none;
-    }
-
-    /* Toggle buttons on media */
-    .pdp-view-mode-bar {
+    .pdp-mode-bar {
       position: absolute;
       bottom: 16px;
       left: 16px;
       display: flex;
       gap: 8px;
       z-index: 10;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.8);
       padding: 4px;
       border-radius: var(--radius-pill);
-      border: 1px solid rgba(255, 255, 255, 0.15);
     }
     .mode-btn {
-      padding: 6px 14px;
+      padding: 8px 16px;
       border-radius: var(--radius-pill);
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--text-muted);
-      transition: all 0.2s;
+      transition: background 0.2s ease, color 0.2s ease;
     }
     .mode-btn.is-active {
       background: #ffffff;
       color: #000000;
     }
 
-    /* Right: Product Buy Box (PhewMew / PinkMatter style) */
     .pdp-buybox {
       display: flex;
       flex-direction: column;
     }
-    .pdp-tag-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
     .pdp-title {
-      font-size: clamp(28px, 3.2vw, 40px);
+      font-size: clamp(28px, 3.2vw, 42px);
       font-weight: 900;
       letter-spacing: -0.04em;
       line-height: 1.15;
-      color: #fff;
-      margin-bottom: 10px;
+      color: #ffffff;
+      margin-bottom: 14px;
     }
-    .pdp-rating-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: #e2b93b;
-      margin-bottom: 18px;
-      font-weight: 700;
-    }
-    .pdp-rating-row span { color: var(--text-muted); }
-
     .pdp-price-row {
       display: flex;
       align-items: baseline;
-      gap: 14px;
-      padding: 18px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      gap: 12px;
+      padding: 14px 20px;
+      background: var(--bg-surface);
+      border-radius: 10px;
       margin-bottom: 24px;
     }
     .pdp-price-sale {
-      font-size: 34px;
+      font-size: 32px;
       font-weight: 900;
-      color: #fff;
+      color: #ffffff;
     }
     .pdp-price-mrp {
-      font-size: 18px;
+      font-size: 16px;
       color: var(--text-dim);
       text-decoration: line-through;
     }
     .pdp-price-badge {
-      background: var(--accent);
-      color: #fff;
-      font-size: 12px;
-      font-weight: 800;
-      padding: 4px 10px;
+      background: var(--pink-accent);
+      color: #000000;
+      font-size: 13px;
+      font-weight: 900;
+      padding: 3px 8px;
       border-radius: var(--radius-pill);
     }
 
-    /* Size Selector */
-    .pdp-option-group {
-      margin-bottom: 22px;
-    }
-    .pdp-option-title {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: #a0a6b5;
-      margin-bottom: 10px;
-    }
-    .pdp-size-pills {
+    .size-pills-row {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 10px;
+      margin-bottom: 20px;
     }
-    .size-pill-btn {
-      padding: 12px 10px;
+    .size-btn {
       background: var(--bg-surface);
-      border: 1px solid var(--border-strong);
       border-radius: 10px;
+      padding: 14px 10px;
       text-align: center;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: background 0.2s ease;
     }
-    .size-pill-btn:hover {
-      border-color: #fff;
+    .size-btn.is-active {
+      background: #252b3b;
+      outline: 2px solid #ffffff;
     }
-    .size-pill-btn.is-active {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: #ffffff;
-      box-shadow: 0 0 0 1px #fff;
+    .size-btn strong {
+      display: block;
+      font-size: 14px;
+      color: #ffffff;
     }
-    .size-name { font-size: 13px; font-weight: 800; color: #fff; display: block; }
-    .size-sub { font-size: 11px; color: var(--text-muted); display: block; margin-top: 2px; }
+    .size-btn span {
+      display: block;
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
 
-    /* Quantity and Action Buttons */
-    .pdp-action-row {
+    .pdp-actions-row {
       display: flex;
       gap: 12px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
-    .pdp-qty-control {
+    .qty-stepper {
       display: flex;
       align-items: center;
       background: var(--bg-surface);
-      border: 1px solid var(--border-strong);
       border-radius: var(--radius-pill);
       height: 52px;
       padding: 0 8px;
     }
-    .pdp-qty-btn {
+    .qty-btn {
       width: 36px;
       height: 36px;
       font-size: 18px;
-      font-weight: 700;
-      color: #fff;
+      font-weight: 800;
+      color: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .pdp-qty-val {
-      padding: 0 14px;
-      font-size: 15px;
+    .qty-display {
+      padding: 0 12px;
+      font-size: 16px;
       font-weight: 800;
-      color: #fff;
+      color: #ffffff;
     }
-
-    .pdp-btn-add {
+    .btn-add-cart {
       flex: 1;
       height: 52px;
       background: #ffffff;
@@ -235,262 +185,216 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      transition: all 0.2s;
+      transition: background 0.2s ease, transform 0.2s ease;
     }
-    .pdp-btn-add:hover {
-      background: #f0f0f4;
+    .btn-add-cart:hover {
+      background: #e6e6e6;
       transform: translateY(-1px);
     }
-
-    .pdp-btn-buy {
+    .btn-buy-now {
       width: 100%;
       height: 52px;
-      background: #ffadc6;
+      background: var(--pink-accent);
       color: #000000;
       border-radius: var(--radius-pill);
-      font-size: 16px;
-      font-weight: 900;
+      font-size: 15px;
+      font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
       margin-bottom: 24px;
-      transition: all 0.2s;
-      box-shadow: 0 8px 24px rgba(255, 173, 198, 0.35);
+      transition: background 0.2s ease, transform 0.2s ease;
       cursor: pointer;
     }
-    .pdp-btn-buy:hover {
-      background: #ff98b6;
+    .btn-buy-now:hover {
+      background: var(--pink-hover);
       transform: translateY(-1px);
-      box-shadow: 0 10px 28px rgba(255, 173, 198, 0.45);
     }
 
-    /* Urgency & Perks */
-    .stock-urgency {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      font-weight: 700;
-      color: #fbbf24;
-      background: rgba(251, 191, 36, 0.1);
-      border: 1px solid rgba(251, 191, 36, 0.2);
-      padding: 10px 14px;
-      border-radius: 8px;
+    .pdp-bullet-list {
+      background: var(--bg-surface);
+      border-radius: 12px;
+      padding: 20px 22px;
       margin-bottom: 24px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+    .pdp-bullet-list p {
+      margin-bottom: 4px;
     }
 
-    /* Accordions */
     .pdp-accordions {
-      border-top: 1px solid var(--border);
-      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
     }
-    .accordion-item {
-      border-bottom: 1px solid var(--border);
+    .accordion-block {
+      background: var(--bg-surface);
+      border-radius: 10px;
+      padding: 0 20px;
     }
     .accordion-header {
       width: 100%;
-      padding: 18px 0;
+      padding: 16px 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 14px;
       font-weight: 800;
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      color: #ffffff;
+      cursor: pointer;
     }
-    .accordion-content {
+    .accordion-header span.plus-sign {
+      color: var(--pink-accent);
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .accordion-body {
+      display: none;
       padding-bottom: 18px;
       font-size: 14px;
       color: var(--text-muted);
       line-height: 1.6;
-      display: none;
     }
-    .accordion-item.is-open .accordion-content {
+    .accordion-block.is-open .accordion-body {
       display: block;
     }
 
-    @media (max-width: 900px) {
-      .pdp-layout {
-        grid-template-columns: 1fr;
-        gap: 36px;
+    @media (max-width: 960px) {
+      .pdp-grid { grid-template-columns: 1fr; gap: 36px; }
+    }
+
+    /* Motion entrance */
+    @media (prefers-reduced-motion: no-preference) {
+      .pdp-title, .pdp-price-row, .size-pills-row, .pdp-actions-row, .btn-buy-now, .pdp-bullet-list, .accordion-block {
+        animation: entranceFade 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Announcement Top Banner -->
+  <!-- Announcement Bar -->
   <aside class="announcement">
-    <span>Free Shipping For Order Above ₹499 and Use Code: "<strong>FLAGSTER10</strong>" For 10% off</span>
+    <span>Free shipping on orders above ₹499. Use code <strong>FLAGSTER10</strong> for 10% off.</span>
   </aside>
 
-  <!-- Sticky Navbar -->
+  <!-- Navigation -->
   <header class="nav-bar">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
-        <span>FLAGSTER</span>
-        <span class="nav-logo-tag">ORIGINALS</span>
+        <span>Flagster</span>
+        <span class="nav-logo-badge">Originals</span>
       </a>
 
       <nav class="nav-links">
         <a href="index.html" class="">Home</a>
         <a href="shop.html" class="is-active">Shop All (8)</a>
-        <a href="index.html#studio" class="">3D Cloth Studio</a>
-        <a href="faq.html" class="">How to Hang & FAQ</a>
-        <a href="contact.html" class="">Contact & Track</a>
+        <a href="faq.html" class="">How to Hang</a>
+        <a href="contact.html" class="">Track Order</a>
       </nav>
 
       <div class="nav-actions">
         <button class="nav-cart-btn" id="open-cart-btn" aria-label="Open Cart">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
           <span>Cart</span>
-          <span class="cart-pill-count" id="nav-cart-badge">0</span>
+          <span class="cart-badge" id="nav-cart-badge">0</span>
         </button>
       </div>
     </div>
   </header>
 
-
-  <main class="pdp-section">
-    <nav class="breadcrumb">
-      <a href="index.html">Home</a>
-      <span>/</span>
-      <a href="shop.html">Shop All</a>
-      <span>/</span>
-      <span id="breadcrumb-title" style="color: #fff;">Tapestry</span>
-    </nav>
-
-    <div class="pdp-layout">
-      <!-- Media Container with 3D Canvas Switch -->
+  <main class="pdp-wrap">
+    <div class="pdp-grid">
+      <!-- Media -->
       <div>
-        <div class="pdp-media-card" id="pdp-media-box">
-          <img src="" id="pdp-main-img" class="pdp-photo-view" alt="Tapestry Banner">
-
+        <div class="pdp-media-card">
+          <img src="products/dreamin-partynextdoor.jpg" id="pdp-main-img" class="pdp-photo-view" alt="Dreamin PartyNextDoor Cover Tapestry">
           <div class="pdp-3d-wrapper" id="pdp-3d-container">
-            <canvas class="hero__cloth" id="pdp-cloth"></canvas>
-            <img class="hero__still" alt="Tapestry 3D Preview">
+            <canvas id="pdp-cloth" class="pdp-cloth-canvas"></canvas>
           </div>
-
-          <div class="pdp-view-mode-bar">
-            <button class="mode-btn is-active" id="mode-photo-btn" onclick="setViewMode('photo')">🖼️ High-Res Photo</button>
-            <button class="mode-btn" id="mode-3d-btn" onclick="setViewMode('3d')">🌀 Interactive 3D Cloth</button>
+          <div class="pdp-mode-bar">
+            <button class="mode-btn is-active" id="btn-mode-photo" onclick="setPdpMode('photo')">Photo View</button>
+            <button class="mode-btn" id="btn-mode-3d" onclick="setPdpMode('3d')">Interactive 3D Cloth</button>
           </div>
         </div>
-
-        <div style="margin-top: 14px; font-size: 12px; color: var(--text-dim); text-align: center;">
-          Switch to <strong>Interactive 3D Cloth</strong> to tug and inspect fabric physics in real time.
-        </div>
+        <p style="font-size: 13px; color: var(--text-dim); text-align: center; margin-top: 12px;">
+          Tug the cloth with your mouse or finger in 3D mode to view realistic drape.
+        </p>
       </div>
 
       <!-- Buy Box -->
       <div class="pdp-buybox">
-        <div class="pdp-tag-row">
-          <span class="product-tag-badge" id="pdp-tag">BESTSELLER</span>
-          <span class="product-discount-badge">50% DISCOUNT</span>
-        </div>
-
-        <h1 class="pdp-title" id="pdp-product-title">Loading Tapestry...</h1>
-
-        <div class="pdp-rating-row">
-          <span>★ ★ ★ ★ ★</span>
-          <span id="pdp-rating-text">4.9 (340 reviews)</span>
-        </div>
+        <h1 class="pdp-title" id="pdp-title-el">Dreamin PartyNextDoor Cover Tapestry</h1>
 
         <div class="pdp-price-row">
-          <span class="pdp-price-sale" id="pdp-price">₹500</span>
-          <span class="pdp-price-mrp" id="pdp-mrp">₹1,000</span>
-          <span class="pdp-price-badge">50% OFF</span>
+          <span class="pdp-price-sale" id="pdp-price-el">₹500</span>
+          <span class="pdp-price-mrp" id="pdp-mrp-el">₹1000</span>
+          <span class="pdp-price-badge">50% Off</span>
         </div>
 
-        <!-- Size Selector -->
-        <div class="pdp-option-group">
-          <div class="pdp-option-title">
-            <span>Choose Size:</span>
-            <span style="color: var(--accent); font-weight: 700;">Wall Safe Grommets Included</span>
+        <div style="font-size: 13px; font-weight: 700; color: var(--text-dim); margin-bottom: 8px;">Size</div>
+        <div class="size-pills-row">
+          <div class="size-btn" onclick="selectSize(this, 'Small (3x2 ft)', 399, 800)">
+            <strong>Small</strong>
+            <span>3 × 2 ft (₹399)</span>
           </div>
-
-          <div class="pdp-size-pills">
-            <div class="size-pill-btn" onclick="selectSize(this, 'Small (3x2 ft)', 399, 799)">
-              <span class="size-name">Small</span>
-              <span class="size-sub">3 × 2 ft (₹399)</span>
-            </div>
-            <div class="size-pill-btn is-active" onclick="selectSize(this, 'Medium (4x3 ft)', 500, 1000)">
-              <span class="size-name">Medium</span>
-              <span class="size-sub">4 × 3 ft (₹500)</span>
-            </div>
-            <div class="size-pill-btn" onclick="selectSize(this, 'Large (5x4 ft)', 699, 1399)">
-              <span class="size-name">Large</span>
-              <span class="size-sub">5 × 4 ft (₹699)</span>
-            </div>
+          <div class="size-btn is-active" onclick="selectSize(this, 'Medium (4x3 ft)', 500, 1000)">
+            <strong>Medium</strong>
+            <span>4 × 3 ft (₹500)</span>
+          </div>
+          <div class="size-btn" onclick="selectSize(this, 'Large (5x4 ft)', 699, 1400)">
+            <strong>Large</strong>
+            <span>5 × 4 ft (₹699)</span>
           </div>
         </div>
 
-        <!-- Stock Urgency Warning -->
-        <div class="stock-urgency">
-          <span>⚡</span>
-          <span>High Demand: Only 6 tapestries left in stock for today's drop!</span>
-        </div>
-
-        <!-- Actions -->
-        <div class="pdp-action-row">
-          <div class="pdp-qty-control">
-            <button class="pdp-qty-btn" onclick="changeQty(-1)">-</button>
-            <span class="pdp-qty-val" id="pdp-qty">1</span>
-            <button class="pdp-qty-btn" onclick="changeQty(1)">+</button>
+        <div class="pdp-actions-row">
+          <div class="qty-stepper">
+            <button class="qty-btn" onclick="changeQty(-1)">−</button>
+            <span class="qty-display" id="pdp-qty-display">1</span>
+            <button class="qty-btn" onclick="changeQty(1)">+</button>
           </div>
-
-          <button class="pdp-btn-add" onclick="handlePdpAdd()">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-            <span>Add to Cart</span>
-          </button>
+          <button class="btn-add-cart" onclick="handlePdpAdd()">Add to Bag</button>
         </div>
 
-        <button class="pdp-btn-buy" onclick="handlePdpBuyNow()">
-          <span>Buy Now • Fast Checkout</span>
-          <span>→</span>
-        </button>
+        <button class="btn-buy-now" onclick="handlePdpBuyNow()">Buy Now</button>
 
-        <!-- Perks list -->
-        <!-- Key Features Checklist (PhewMew Style) -->
-        <div style="background: var(--bg-surface); padding: 18px 20px; border-radius: 12px; margin-bottom: 24px; font-size: 14px; line-height: 1.8; color: var(--text-muted); border: 1px solid var(--border);">
-          <p>• <strong>Tough and fancy</strong>, great for any bedroom, studio, or dorm spot</p>
-          <p>• <strong>Come with metal grommets and sticky screws</strong> for effortless hanging</p>
-          <p>• <strong>Bright colors and cool designs</strong>, bringing instant aesthetic flair to your place</p>
-          <p style="margin-top: 6px;"><a href="#details" style="color: #ffadc6; font-size: 12px; font-weight: 700;">Read more ▾</a></p>
+        <div class="pdp-bullet-list">
+          <p>• Tough and fancy, great for any spot</p>
+          <p>• Come with metal grommets and sticky screws for easy hanging</p>
+          <p>• Bright colors and cool designs, bringing a bit of flair to your place</p>
         </div>
 
-        <!-- Accordions -->
         <div class="pdp-accordions">
-          <div class="accordion-item is-open">
-            <button class="accordion-header" onclick="toggleAccordion(this)">
-              <span>HOW TO INSTALL / APPLY</span>
-              <span>+</span>
+          <div class="accordion-block is-open">
+            <button class="accordion-header" onclick="toggleAcc(this)">
+              <span>How to Install / Apply</span>
+              <span class="plus-sign">+</span>
             </button>
-            <div class="accordion-content">
-              Mounting takes 30 seconds. Every Flagster tapestry features 4 pre-installed brass eyelets (one in each corner). Use thumbtacks, pushpins, 3M Command clear hooks, or small nails without damaging your wall or the tapestry.
+            <div class="accordion-body">
+              Mounting takes 30 seconds. Four pre-installed solid brass eyelets in each corner. Hang securely with thumbtacks, pushpins, 3M Command hooks, or small nails without damaging wall plaster or the fabric.
             </div>
           </div>
 
-          <div class="accordion-item">
-            <button class="accordion-header" onclick="toggleAccordion(this)">
-              <span>MATERIAL & CARE</span>
-              <span>+</span>
+          <div class="accordion-block">
+            <button class="accordion-header" onclick="toggleAcc(this)">
+              <span>Material and Care</span>
+              <span class="plus-sign">+</span>
             </button>
-            <div class="accordion-content">
-              Crafted from 100% heavyweight woven polyester canvas. Machine wash cold on gentle cycle. To remove shipping fold lines, iron on low heat from the reverse side with a cloth barrier, or steam lightly.
+            <div class="accordion-body">
+              100% heavyweight 180GSM micro-weave poly-canvas. Machine washable on cold gentle cycle. Hang dry or steam on low heat to release any packing folds. Colors are permanently infused and won't wash out.
             </div>
           </div>
 
-          <div class="accordion-item">
-            <button class="accordion-header" onclick="toggleAccordion(this)">
-              <span>SHIPPING & PACKAGING</span>
-              <span>+</span>
+          <div class="accordion-block">
+            <button class="accordion-header" onclick="toggleAcc(this)">
+              <span>Shipping and Packaging</span>
+              <span class="plus-sign">+</span>
             </button>
-            <div class="accordion-content">
-              Dispatched within 24 hours from our warehouse. Metro deliveries arrive in 2-3 business days; all other pin codes in 4-5 business days. Free shipping on orders over ₹999. Cash on Delivery (COD) supported.
+            <div class="accordion-body">
+              Orders dispatch within 24 hours from Mumbai. Typical delivery time is 3 to 5 business days pan-India. Free delivery on orders above ₹499. Cash on delivery available.
             </div>
           </div>
         </div>
@@ -498,203 +402,291 @@
     </div>
   </main>
 
+  <!-- Related Wall Drops -->
+  <section class="pdp-wrap" style="padding-top: 20px;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px;">
+      <div>
+        <h2 style="font-size: 28px; font-weight: 800; color: #fff;">More Wall Drops</h2>
+        <p style="font-size: 15px; color: var(--text-muted); margin-top: 4px;">Explore more statement album flags.</p>
+      </div>
+      <a href="shop.html" class="btn-secondary" style="font-size: 14px; padding: 10px 20px;">View All</a>
+    </div>
+
+    <div class="product-grid">
+      
+      <article class="product-card">
+        <div class="product-thumb-wrap">
+          <a href="product.html?id=music">
+            <img class="product-thumb-img" src="products/music-is-my-drug.jpg" alt="MUSIC IS MY DRUG Tapestry" loading="lazy">
+          </a>
+          <span class="badge-tag">ICONIC DROP</span>
+          <span class="badge-sale">50% Off</span>
+        </div>
+        <div class="product-body">
+          <div class="product-category">Typography</div>
+          <h3 class="product-title"><a href="product.html?id=music">MUSIC IS MY DRUG Tapestry</a></h3>
+          <p class="product-desc">Heavyweight bold statement typographic wall tapestry with raw contrast and street grunge energy.</p>
+          <div class="product-footer">
+            <div>
+              <span class="price-current">₹500</span>
+              <span class="price-mrp">₹1000</span>
+            </div>
+            <div>
+              <a href="product.html?id=music" class="btn-view-drop">Details</a>
+              <button class="btn-quick-add" onclick="addToCart('music', 1, 'Medium (4x3 ft)')">Add</button>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="product-thumb-wrap">
+          <a href="product.html?id=hardstone">
+            <img class="product-thumb-img" src="products/hardstone-psycho.jpg" alt="Hardstone Psycho Rider Tapestry" loading="lazy">
+          </a>
+          <span class="badge-tag">HOT DROP</span>
+          <span class="badge-sale">50% Off</span>
+        </div>
+        <div class="product-body">
+          <div class="product-category">Street Drip</div>
+          <h3 class="product-title"><a href="product.html?id=hardstone">Hardstone Psycho Rider Tapestry</a></h3>
+          <p class="product-desc">Cinematic desert sunset biker aesthetic with distressed heavy-duty bandana emblem. Instant wall statement.</p>
+          <div class="product-footer">
+            <div>
+              <span class="price-current">₹500</span>
+              <span class="price-mrp">₹1000</span>
+            </div>
+            <div>
+              <a href="product.html?id=hardstone" class="btn-view-drop">Details</a>
+              <button class="btn-quick-add" onclick="addToCart('hardstone', 1, 'Medium (4x3 ft)')">Add</button>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="product-thumb-wrap">
+          <a href="product.html?id=currents">
+            <img class="product-thumb-img" src="products/tame-impala-currents.jpg" alt="Tame Impala — Currents Tapestry" loading="lazy">
+          </a>
+          <span class="badge-tag">FAN FAVORITE</span>
+          <span class="badge-sale">50% Off</span>
+        </div>
+        <div class="product-body">
+          <div class="product-category">Psychedelic</div>
+          <h3 class="product-title"><a href="product.html?id=currents">Tame Impala — Currents Tapestry</a></h3>
+          <p class="product-desc">The legendary psychedelic fluid wave artwork with floating chrome sphere and vivid sunset beam.</p>
+          <div class="product-footer">
+            <div>
+              <span class="price-current">₹500</span>
+              <span class="price-mrp">₹1000</span>
+            </div>
+            <div>
+              <a href="product.html?id=currents" class="btn-view-drop">Details</a>
+              <button class="btn-quick-add" onclick="addToCart('currents', 1, 'Medium (4x3 ft)')">Add</button>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="product-thumb-wrap">
+          <a href="product.html?id=damn">
+            <img class="product-thumb-img" src="products/kendrick-damn.jpg" alt="Kendrick Lamar — DAMN. Tapestry" loading="lazy">
+          </a>
+          <span class="badge-tag">PULITZER</span>
+          <span class="badge-sale">50% Off</span>
+        </div>
+        <div class="product-body">
+          <div class="product-category">Hip-Hop</div>
+          <h3 class="product-title"><a href="product.html?id=damn">Kendrick Lamar — DAMN. Tapestry</a></h3>
+          <p class="product-desc">The Pulitzer-winning masterpiece album cover featuring Kendrick Lamar against the iconic crimson brick backdrop.</p>
+          <div class="product-footer">
+            <div>
+              <span class="price-current">₹500</span>
+              <span class="price-mrp">₹1000</span>
+            </div>
+            <div>
+              <a href="product.html?id=damn" class="btn-view-drop">Details</a>
+              <button class="btn-quick-add" onclick="addToCart('damn', 1, 'Medium (4x3 ft)')">Add</button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer class="site-footer">
-    <div class="footer-top">
-      <div class="footer-col">
-        <div class="nav-logo" style="margin-bottom: 16px;">
-          <span>FLAGSTER</span>
-          <span class="nav-logo-tag">ORIGINALS</span>
-        </div>
-        <p>Premium statement wall tapestries inspired by hip-hop, street drip, and indie album art. 4 corner brass grommets, heavy micro-weave canvas, and fade-resistant thermal print. Fixed at ₹500.</p>
-        <p style="color: #6a7182; font-size: 13px;">Free shipping across India on 2+ flags.</p>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>Flagster</h4>
+        <p>Heavyweight graphic wall tapestries. Printed with fade-resistant dye sublimation and finished with four pre-installed brass corner eyelets.</p>
       </div>
 
       <div class="footer-col">
-        <h4>Navigation</h4>
-        <ul class="footer-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="shop.html">Shop All Tapestries</a></li>
-          <li><a href="index.html#studio">3D Interactive Studio</a></li>
-          <li><a href="faq.html">How to Hang Guide</a></li>
-          <li><a href="contact.html">Track My Order</a></li>
+        <h5>Catalog</h5>
+        <ul>
+          <li><a href="shop.html">All Drops</a></li>
+          <li><a href="shop.html?cat=Hip-Hop">Hip-Hop</a></li>
+          <li><a href="shop.html?cat=Street+Drip">Street Drip</a></li>
+          <li><a href="shop.html?cat=Psychedelic">Psychedelic</a></li>
+          <li><a href="shop.html?cat=Typography">Typography</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4>Customer Care</h4>
-        <ul class="footer-links">
-          <li><a href="faq.html#shipping">Shipping & Delivery</a></li>
-          <li><a href="faq.html#returns">7-Day Replacement</a></li>
-          <li><a href="faq.html#care">Washing & Care</a></li>
-          <li><a href="contact.html">WhatsApp Support</a></li>
+        <h5>Support</h5>
+        <ul>
+          <li><a href="faq.html">How to Hang Guide</a></li>
+          <li><a href="faq.html#care">Fabric Care</a></li>
+          <li><a href="faq.html#shipping">Shipping and Returns</a></li>
+          <li><a href="contact.html">Track Order</a></li>
           <li><a href="contact.html">Contact Us</a></li>
         </ul>
       </div>
 
-      <div class="footer-col">
-        <h4>VIP Drop List</h4>
-        <p>Subscribe for secret midnight drops and an instant 10% coupon.</p>
-        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Welcome to Flagster VIP! Use code FLAGSTER10 at checkout.');">
-          <input type="email" class="newsletter-input" placeholder="Your email..." required>
-          <button type="submit" class="newsletter-btn">Join</button>
+      <div class="footer-col footer-newsletter">
+        <h5>Updates</h5>
+        <p>Join for release notifications on upcoming limited wall drops.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed for drop alerts.');">
+          <input type="email" class="newsletter-input" placeholder="Your email address" required>
+          <button type="submit" class="btn-primary" style="padding: 10px 18px; font-size: 14px;">Join</button>
         </form>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <span>© 2026 FLAGSTER INC. All rights reserved.</span>
-      <span>Flat ₹500 (50% Off MRP ₹1,000) • Cash on Delivery & Fast UPI Available</span>
+      <span>2026 Flagster. All rights reserved.</span>
+      <span>Flat ₹500 per flag. Cash on delivery available across India.</span>
     </div>
   </footer>
 
-  <!-- Slide-In Cart Drawer -->
-  <div class="cart-backdrop" id="cart-backdrop">
-    <aside class="cart-drawer" role="dialog" aria-label="Shopping Cart">
-      <div class="cart-header">
-        <h3>Your Cart (<span id="cart-drawer-count">0</span>)</h3>
-        <button class="cart-close-btn" id="cart-close-btn" aria-label="Close Cart">&times;</button>
+  <!-- Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cart-drawer-overlay" onclick="closeCart()"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Shopping Cart">
+    <div class="cart-header">
+      <h3>Your Bag</h3>
+      <button class="btn-close-cart" onclick="closeCart()" aria-label="Close Bag">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="shipping-meter">
+      <div id="shipping-meter-text">Add ₹499 for free express delivery</div>
+      <div class="shipping-meter-bar-bg">
+        <div class="shipping-meter-bar-fill" id="shipping-meter-bar"></div>
+      </div>
+    </div>
+
+    <div class="cart-items-list" id="cart-items-container">
+      <!-- Injected by cart.js -->
+    </div>
+
+    <div class="cart-footer">
+      <div class="coupon-box">
+        <input type="text" id="coupon-input" class="coupon-input" placeholder="Promo code (e.g. FLAGSTER10)">
+        <button class="coupon-btn" onclick="applyCouponCode()">Apply</button>
+      </div>
+      <div id="coupon-status" style="font-size: 13px; margin-bottom: 8px;"></div>
+
+      <div class="cart-summary-line">
+        <span>Subtotal</span>
+        <span id="cart-subtotal-val">₹0</span>
+      </div>
+      <div class="cart-summary-line" id="cart-discount-row" style="display: none; color: var(--pink-accent);">
+        <span>Discount</span>
+        <span id="cart-discount-val">−₹0</span>
+      </div>
+      <div class="cart-summary-line">
+        <span>Shipping</span>
+        <span id="cart-shipping-val">Calculated at checkout</span>
+      </div>
+      <div class="cart-summary-line total">
+        <span>Total</span>
+        <span id="cart-total-val">₹0</span>
       </div>
 
-      <div class="cart-shipping-banner" id="cart-shipping-msg">
-        ⚡ Add 1 more flag to unlock FREE SHIPPING!
-      </div>
-
-      <div class="cart-items" id="cart-items-container">
-        <!-- Injected via cart.js -->
-      </div>
-
-      <div class="cart-footer">
-        <div class="cart-coupon-row">
-          <input type="text" class="cart-coupon-input" id="coupon-input" placeholder="Coupon Code (e.g. FLAGSTER10)">
-          <button class="cart-coupon-btn" onclick="applyCoupon()">Apply</button>
-        </div>
-        <div class="cart-subtotal">
-          <span>Subtotal</span>
-          <span id="cart-subtotal-val">₹0</span>
-        </div>
-        <div class="cart-subtotal" style="color: var(--green);">
-          <span>50% Drop Discount</span>
-          <span id="cart-discount-val">-₹0</span>
-        </div>
-        <div class="cart-subtotal">
-          <span>Shipping</span>
-          <span id="cart-shipping-val">₹50</span>
-        </div>
-        <div class="cart-total">
-          <span>Total</span>
-          <span id="cart-total-val">₹0</span>
-        </div>
-        <button class="cart-checkout-btn" id="cart-checkout-btn">
-          <span>Proceed to Checkout</span>
-          <span>→</span>
-        </button>
-      </div>
-    </aside>
-  </div>
+      <button class="btn-pink btn-checkout" onclick="openCheckout()">Proceed to Checkout</button>
+    </div>
+  </aside>
 
   <!-- Checkout Modal -->
-  <div class="modal-backdrop" id="checkout-modal">
-    <div class="modal-box">
-      <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+  <div class="checkout-modal-overlay" id="checkout-modal-overlay">
+    <div class="checkout-modal" role="dialog" aria-modal="true">
+      <button onclick="closeCheckout()" style="position: absolute; top: 20px; right: 24px; color: var(--text-dim); font-size: 20px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
 
       <div id="checkout-form-view">
-        <h3 class="modal-title">Fast Checkout</h3>
-        <p class="modal-sub">Fast dispatch within 24h with brass grommet mounting kit.</p>
+        <h2>Order Details</h2>
+        <p class="sub">Complete your shipping address and select payment.</p>
 
-        <form id="order-form" onsubmit="handlePlaceOrder(event)">
-          <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" class="form-input" placeholder="e.g. Aryan Sharma" required>
-          </div>
-
+        <form id="checkout-form" onsubmit="handlePlaceOrder(event)">
           <div class="form-row">
             <div class="form-group">
-              <label>Phone Number (for delivery SMS)</label>
-              <input type="tel" class="form-input" placeholder="+91 98765 43210" required>
+              <label>Full Name</label>
+              <input type="text" id="cust-name" required placeholder="Alex Turner">
             </div>
             <div class="form-group">
-              <label>PIN Code</label>
-              <input type="text" class="form-input" placeholder="e.g. 560001" required>
+              <label>Phone Number</label>
+              <input type="tel" id="cust-phone" required placeholder="+91 98765 43210">
             </div>
           </div>
 
           <div class="form-group">
             <label>Delivery Address</label>
-            <input type="text" class="form-input" placeholder="Flat, Building, Street name" required>
+            <input type="text" id="cust-address" required placeholder="Flat, Street, Area">
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label>City</label>
-              <input type="text" class="form-input" placeholder="e.g. Bengaluru" required>
+              <input type="text" id="cust-city" required placeholder="Mumbai">
             </div>
             <div class="form-group">
-              <label>State</label>
-              <input type="text" class="form-input" placeholder="e.g. Karnataka" required>
+              <label>Pincode</label>
+              <input type="text" id="cust-pin" required placeholder="400001">
             </div>
           </div>
 
           <div class="form-group">
             <label>Payment Method</label>
-            <div class="payment-options">
-              <div class="payment-option is-selected" onclick="selectPayment(this, 'cod')">
-                <div style="font-size: 20px;">💵</div>
-                <div class="payment-option-title">Cash on Delivery</div>
+            <div class="payment-selector">
+              <div class="payment-opt is-active" onclick="selectPayment(this, 'cod')">
+                <h5>Cash on Delivery</h5>
+                <span>Pay upon arrival</span>
               </div>
-              <div class="payment-option" onclick="selectPayment(this, 'upi')">
-                <div style="font-size: 20px;">📱</div>
-                <div class="payment-option-title">UPI / GPay</div>
+              <div class="payment-opt" onclick="selectPayment(this, 'upi')">
+                <h5>UPI / QR</h5>
+                <span>Instant payment</span>
               </div>
-              <div class="payment-option" onclick="selectPayment(this, 'card')">
-                <div style="font-size: 20px;">💳</div>
-                <div class="payment-option-title">Card / NetBanking</div>
+              <div class="payment-opt" onclick="selectPayment(this, 'card')">
+                <h5>Card / Netbanking</h5>
+                <span>Online transfer</span>
               </div>
             </div>
           </div>
 
-          <div class="order-summary-box">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-              <span>Total Items</span>
-              <strong id="modal-item-count">1 item</strong>
-            </div>
-            <div style="display: flex; justify-content: space-between; font-size: 16px;">
-              <span>Final Payable</span>
-              <strong style="color: #fff;" id="modal-final-total">₹500</strong>
-            </div>
-          </div>
-
-          <button type="submit" class="cart-checkout-btn" style="background: var(--accent); color: #fff;">
-            <span>Confirm Order</span>
-            <span>✓</span>
-          </button>
+          <button type="submit" class="btn-pink" style="width: 100%; margin-top: 16px;">Place Order</button>
         </form>
       </div>
 
-      <div class="success-view" id="checkout-success-view">
-        <div class="success-icon">✓</div>
-        <h3 class="modal-title">Order Confirmed!</h3>
-        <p class="modal-sub">Thank you for ordering with Flagster! We are preparing your tapestries.</p>
-        <div style="background: var(--bg-surface); padding: 18px; border-radius: 12px; margin: 20px 0; font-size: 14px; text-align: left;">
-          <p><strong>Order ID:</strong> #FLG-<span id="confirmed-order-id">82914</span></p>
-          <p style="margin-top: 6px;"><strong>Delivery Estimate:</strong> 3-4 Business Days</p>
-          <p style="margin-top: 6px; color: var(--green);"><strong>Status:</strong> Ready for Dispatch</p>
+      <div class="order-success-modal" id="checkout-success-view">
+        <div class="success-circle">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <button class="btn btn-primary" style="width: 100%;" onclick="closeCheckout()">
-          Continue Browsing
-        </button>
+        <h2>Order Confirmed</h2>
+        <p class="sub" id="order-confirm-msg">Thank you. Your order has been placed successfully.</p>
+        <p style="font-size: 15px; margin-bottom: 24px;">Order ID: <strong id="order-confirm-id" style="color: var(--pink-accent);">FLG-84920</strong></p>
+        <button class="btn-primary" onclick="closeCheckout(); window.location.href='contact.html';">Track Status</button>
       </div>
     </div>
   </div>
-
 
   <script src="js/products.js"></script>
   <script src="js/cloth-sim.js"></script>
   <script src="js/cart.js"></script>
   <script>
-    let currentProduct = null;
-    let selectedSize = 'Medium (4x3 ft)';
+    let currentProd = null;
+    let selectedSizeName = 'Medium (4x3 ft)';
     let selectedPrice = 500;
     let selectedMrp = 1000;
     let currentQty = 1;
@@ -702,30 +694,24 @@
 
     document.addEventListener('DOMContentLoaded', function() {
       const params = new URLSearchParams(window.location.search);
-      const id = params.get('id') || 'music';
-      currentProduct = window.FLAGSTER_PRODUCTS.find(x => x.id === id) || window.FLAGSTER_PRODUCTS[0];
+      const id = params.get('id') || 'pnd';
+      currentProd = window.FLAGSTER_PRODUCTS.find(x => x.id === id) || window.FLAGSTER_PRODUCTS[0];
 
-      // Populate PDP
-      document.title = `${currentProduct.title} — Flagster`;
-      document.getElementById('breadcrumb-title').textContent = currentProduct.title;
-      document.getElementById('pdp-product-title').textContent = currentProduct.title;
-      document.getElementById('pdp-tag').textContent = currentProduct.tag;
-      document.getElementById('pdp-rating-text').textContent = `${currentProduct.rating} (${currentProduct.reviewsCount} reviews)`;
-      document.getElementById('pdp-main-img').src = currentProduct.img;
-
-      // Update price
+      document.title = `${currentProd.title} · Flagster`;
+      document.getElementById('pdp-title-el').textContent = currentProd.title;
+      document.getElementById('pdp-main-img').src = currentProd.img;
       updatePriceDisplay();
     });
 
     function updatePriceDisplay() {
-      document.getElementById('pdp-price').textContent = `₹${selectedPrice}`;
-      document.getElementById('pdp-mrp').textContent = `₹${selectedMrp}`;
+      document.getElementById('pdp-price-el').textContent = `₹${selectedPrice}`;
+      document.getElementById('pdp-mrp-el').textContent = `₹${selectedMrp}`;
     }
 
-    function selectSize(el, sizeName, price, mrp) {
-      document.querySelectorAll('.size-pill-btn').forEach(b => b.classList.remove('is-active'));
+    function selectSize(el, name, price, mrp) {
+      document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('is-active'));
       el.classList.add('is-active');
-      selectedSize = sizeName;
+      selectedSizeName = name;
       selectedPrice = price;
       selectedMrp = mrp;
       updatePriceDisplay();
@@ -733,45 +719,44 @@
 
     function changeQty(delta) {
       currentQty = Math.max(1, currentQty + delta);
-      document.getElementById('pdp-qty').textContent = currentQty;
+      document.getElementById('pdp-qty-display').textContent = currentQty;
     }
 
     function handlePdpAdd() {
-      if (!currentProduct) return;
-      addToCart(currentProduct.id, currentQty, selectedSize);
+      if (!currentProd) return;
+      addToCart(currentProd.id, currentQty, selectedSizeName);
     }
 
     function handlePdpBuyNow() {
-      if (!currentProduct) return;
-      addToCart(currentProduct.id, currentQty, selectedSize);
+      if (!currentProd) return;
+      addToCart(currentProd.id, currentQty, selectedSizeName);
       closeCart();
       openCheckout();
     }
 
-    function toggleAccordion(btn) {
-      const item = btn.parentElement;
-      item.classList.toggle('is-open');
+    function toggleAcc(btn) {
+      btn.parentElement.classList.toggle('is-open');
     }
 
-    function setViewMode(mode) {
-      const photoView = document.getElementById('pdp-main-img');
+    function setPdpMode(mode) {
+      const img = document.getElementById('pdp-main-img');
       const container3D = document.getElementById('pdp-3d-container');
-      const btnPhoto = document.getElementById('mode-photo-btn');
-      const btn3D = document.getElementById('mode-3d-btn');
+      const btnPhoto = document.getElementById('btn-mode-photo');
+      const btn3D = document.getElementById('btn-mode-3d');
 
       if (mode === '3d') {
-        photoView.style.display = 'none';
+        img.style.display = 'none';
         container3D.classList.add('is-active');
         btnPhoto.classList.remove('is-active');
         btn3D.classList.add('is-active');
 
-        if (!pdpClothEngine && currentProduct) {
-          pdpClothEngine = window.initFlagsterCloth('pdp-cloth', 'pdp-3d-container', currentProduct.img);
-        } else if (pdpClothEngine && currentProduct) {
-          pdpClothEngine.setTexture(currentProduct.img);
+        if (!pdpClothEngine && currentProd && window.initFlagsterCloth) {
+          pdpClothEngine = window.initFlagsterCloth('pdp-cloth', 'pdp-3d-container', currentProd.img);
+        } else if (pdpClothEngine && currentProd) {
+          pdpClothEngine.setTexture(currentProd.img);
         }
       } else {
-        photoView.style.display = 'block';
+        img.style.display = 'block';
         container3D.classList.remove('is-active');
         btnPhoto.classList.add('is-active');
         btn3D.classList.remove('is-active');
