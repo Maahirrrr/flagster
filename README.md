@@ -1,37 +1,42 @@
-# Flagster / Peculiar Atelier
+# Flagster — Statement Wall Tapestries & Flags
 
-A standalone, single-file interactive full-screen hero section featuring a real-time WebGL 1 cloth simulation with custom holographic foil shading.
+Flagster is a complete e-commerce brand website for statement wall tapestries and album flags, featuring a **real-time WebGL 1 3D interactive cloth simulator** with dynamic flag switching and pure studio lighting.
 
-Built with **vanilla HTML, CSS, and WebGL** — no frameworks, no build step, no libraries, and zero local asset dependencies.
+All tapestries are priced at **₹500 (50% OFF, MRP ₹1,000)**.
+
+Live repository: **https://github.com/Maahirrrr/flagster**
+
+## Featured Drops (₹500 each)
+
+1. **MUSIC IS MY DR★G Tapestry** (Street & Culture)
+2. **Hardstone Psycho Rider Tapestry** (Street & Culture)
+3. **Tame Impala — Currents Tapestry** (Psychedelic & Indie)
+4. **Kendrick Lamar — DAMN. Tapestry** (Hip-Hop & Rap)
+5. **Travis Scott — Circus Maximus / Utopia Tapestry** (Hip-Hop & Rap)
+6. **Playboi Carti — Whole Lotta Red Tapestry** (Hip-Hop & Rap)
 
 ## Features
 
-- **Real-Time 3D Cloth Physics**:
-  - 46 × 42 mass-spring particle lattice (`COLS = 46`, `ROWS = 42`).
-  - Distance constraints across orthogonal neighbors, cell diagonals, 2-apart bends, and 5-apart bends.
-  - Verlet integration with time-based flutter, gusts, speed capping, and dual-pin tether clamping.
-  - 360-step pre-warmup integration so the cloth hangs naturally from the initial frame.
-  - Interactive pointer picking with depth-weighted ray projection, $(1 - d^2)^2$ quartic kernel carry weights, and pointer capture with release momentum.
+- **Interactive 3D Hanging Flag Studio**:
+  - Live physics cloth simulation with Verlet integration, dual-corner pin hanging, flutter gusts, and momentum throw.
+  - Interactive Flag Selector: click any product thumbnail or "3D View" on product cards to dynamically re-texture the real-time 3D cloth!
+  - 4-corner brass grommets aligned with physical mounting points.
+- **E-Commerce Functionality**:
+  - Category filters: *All Flags*, *Hip-Hop & Rap*, *Street & Culture*, *Psychedelic & Indie*.
+  - Slide-in Cart Drawer with quantity adjustment, free shipping calculator, and subtotal calculation.
+  - Interactive Checkout Modal supporting Cash on Delivery (COD), UPI / GPay, and Cards.
+  - Instant order confirmation flow.
+- **Craftsmanship & Specs**:
+  - 180GSM heavyweight micro-weave polyester canvas.
+  - 4 pre-installed corner brass grommets for easy thumbtack/hook hanging.
+  - Thermal sublimation print with rich contrast and fade resistance.
+- **Zero Dependencies**:
+  - Pure HTML, CSS, JavaScript, and WebGL 1.
+  - Works immediately across desktop and mobile devices.
 
-- **Custom Holographic Foil Shader**:
-  - High-precision GLSL fragment shader modeling three softbox studio reflections (overhead strip light, side softbox, key light) with `smoothstep(-0.5, 0.5)` borders.
-  - Multi-harmonic iridescent thin-film color phase calculation.
-  - Print luminance-based metallic gloss modulation and cubic Fresnel rim glow.
-  - Back-face foil lighting and soft highlight roll-off curve.
+## Local Usage
 
-- **Dynamic Studio Shadow**:
-  - 1/8 resolution offscreen framebuffer silhouette rendering with 7×7 Gaussian blur composite.
-
-- **Responsive & Accessible**:
-  - Desktop wide layout (`width >= 1100`, `aspectRatio >= 1.25`) side-by-side with large display title.
-  - Stacked mobile layout responsive down to 375px with zero horizontal scroll.
-  - Smooth entrance rise animations, hover transitions, and keyboard focus outlines.
-  - Full support for `prefers-reduced-motion: reduce`.
-  - Automatic graceful fallback to styled still image if WebGL is unavailable.
-
-## Usage
-
-Simply open `index.html` in any modern web browser or serve with any static web server:
+Open `index.html` in any web browser or serve with a static server:
 
 ```bash
 # Python 3
