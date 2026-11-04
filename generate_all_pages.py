@@ -293,18 +293,25 @@ img {
 }
 .product-thumb-wrap {
   position: relative;
-  aspect-ratio: 1.25/1;
-  background: #000000;
+  aspect-ratio: 4/3;
+  background: #040507;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
+  padding: 14px;
 }
 .product-thumb-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  transition: transform 0.3s ease;
+  
 }
 .product-card:hover .product-thumb-img {
-  transform: scale(1.04);
+  transform: scale(1.02);
 }
 .badge-tag {
   position: absolute;
@@ -769,13 +776,75 @@ img {
   color: var(--text-dim);
 }
 
+.nav-mobile-strip {
+  display: none;
+}
+
 @media (max-width: 900px) {
+  .features-grid { grid-template-columns: 1fr 1fr; gap: 18px; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
 }
+@media (max-width: 768px) {
+  .nav-inner {
+    padding: 12px var(--gutter);
+  }
+  .nav-links {
+    display: none;
+  }
+  .nav-mobile-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    padding: 0 var(--gutter) 14px;
+    width: 100%;
+  }
+  .mobile-nav-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 4px;
+    border-radius: var(--radius-pill);
+    background: var(--bg-card);
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-align: center;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .mobile-nav-pill.is-active,
+  .mobile-nav-pill:active {
+    background: #ffffff;
+    color: #000000;
+  }
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .product-body {
+    padding: 18px;
+  }
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
 @media (max-width: 600px) {
-  .nav-links { display: none; }
+  .features-grid { grid-template-columns: 1fr; gap: 14px; }
   .footer-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
+  .cart-drawer {
+    width: 100%;
+    max-width: 100vw;
+  }
+}
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
 }
 """
 
@@ -811,6 +880,14 @@ def get_header(active='home'):
         </button>
       </div>
     </div>
+
+    <!-- Mobile Scrollable Navigation Strip -->
+    <nav class="nav-mobile-strip" aria-label="Mobile Navigation">
+      <a href="index.html" class="mobile-nav-pill {'is-active' if active == 'home' else ''}">Home</a>
+      <a href="shop.html" class="mobile-nav-pill {'is-active' if active == 'shop' else ''}">Shop All ({len(PRODUCTS)})</a>
+      <a href="faq.html" class="mobile-nav-pill {'is-active' if active == 'faq' else ''}">How to Hang</a>
+      <a href="contact.html" class="mobile-nav-pill {'is-active' if active == 'contact' else ''}">Track Order</a>
+    </nav>
   </header>"""
 
 def get_footer():
@@ -1071,7 +1148,9 @@ def build_index():
     .thumb-picker-btn img {{
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      background: #040507;
+      padding: 2px;
     }}
     .hero-price-line {{
       display: flex;
@@ -1152,6 +1231,33 @@ def build_index():
         grid-template-columns: 1fr;
         gap: 36px;
         min-height: auto;
+      }}
+    }}
+    @media (max-width: 768px) {{
+      .hero-stage-box {{
+        aspect-ratio: 1.15/1;
+        max-height: 380px;
+        width: 100%;
+      }}
+      .tapestry-thumbs-row {{
+        flex-wrap: wrap;
+        gap: 8px;
+        overflow-x: visible;
+      }}
+      .thumb-picker-btn {{
+        width: 48px;
+        height: 48px;
+      }}
+      .hero-actions {{
+        flex-direction: column;
+        gap: 10px;
+      }}
+      .hero-actions button,
+      .hero-actions a {{
+        width: 100%;
+        height: 48px;
+        text-align: center;
+        justify-content: center;
       }}
     }}
   </style>
@@ -1327,16 +1433,22 @@ def build_product():
 
     .pdp-media-card {{
       position: relative;
-      background: #000000;
+      background: #040507;
       border-radius: 16px;
       overflow: hidden;
-      aspect-ratio: 1.38/1;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
     }}
     .pdp-photo-view {{
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      object-position: center;
       display: block;
+      
     }}
     .pdp-3d-wrapper {{
       position: absolute;

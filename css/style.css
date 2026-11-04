@@ -275,18 +275,25 @@ img {
 }
 .product-thumb-wrap {
   position: relative;
-  aspect-ratio: 1.25/1;
-  background: #000000;
+  aspect-ratio: 4/3;
+  background: #040507;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
+  padding: 14px;
 }
 .product-thumb-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  transition: transform 0.3s ease;
+  
 }
 .product-card:hover .product-thumb-img {
-  transform: scale(1.04);
+  transform: scale(1.02);
 }
 .badge-tag {
   position: absolute;
@@ -751,11 +758,73 @@ img {
   color: var(--text-dim);
 }
 
+.nav-mobile-strip {
+  display: none;
+}
+
 @media (max-width: 900px) {
+  .features-grid { grid-template-columns: 1fr 1fr; gap: 18px; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
 }
+@media (max-width: 768px) {
+  .nav-inner {
+    padding: 12px var(--gutter);
+  }
+  .nav-links {
+    display: none;
+  }
+  .nav-mobile-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    padding: 0 var(--gutter) 14px;
+    width: 100%;
+  }
+  .mobile-nav-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 4px;
+    border-radius: var(--radius-pill);
+    background: var(--bg-card);
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-align: center;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .mobile-nav-pill.is-active,
+  .mobile-nav-pill:active {
+    background: #ffffff;
+    color: #000000;
+  }
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .product-body {
+    padding: 18px;
+  }
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
 @media (max-width: 600px) {
-  .nav-links { display: none; }
+  .features-grid { grid-template-columns: 1fr; gap: 14px; }
   .footer-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
+  .cart-drawer {
+    width: 100%;
+    max-width: 100vw;
+  }
+}
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
 }

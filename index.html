@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Flagster · Wall Tapestries and Graphic Flags</title>
@@ -86,7 +85,9 @@
     .thumb-picker-btn img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      background: #040507;
+      padding: 2px;
     }
     .hero-price-line {
       display: flex;
@@ -169,6 +170,33 @@
         min-height: auto;
       }
     }
+    @media (max-width: 768px) {
+      .hero-stage-box {
+        aspect-ratio: 1.15/1;
+        max-height: 380px;
+        width: 100%;
+      }
+      .tapestry-thumbs-row {
+        flex-wrap: wrap;
+        gap: 8px;
+        overflow-x: visible;
+      }
+      .thumb-picker-btn {
+        width: 48px;
+        height: 48px;
+      }
+      .hero-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .hero-actions button,
+      .hero-actions a {
+        width: 100%;
+        height: 48px;
+        text-align: center;
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 <body>
@@ -200,6 +228,14 @@
         </button>
       </div>
     </div>
+
+    <!-- Mobile Scrollable Navigation Strip -->
+    <nav class="nav-mobile-strip" aria-label="Mobile Navigation">
+      <a href="index.html" class="mobile-nav-pill is-active">Home</a>
+      <a href="shop.html" class="mobile-nav-pill ">Shop All (8)</a>
+      <a href="faq.html" class="mobile-nav-pill ">How to Hang</a>
+      <a href="contact.html" class="mobile-nav-pill ">Track Order</a>
+    </nav>
   </header>
 
   <!-- Marquee -->

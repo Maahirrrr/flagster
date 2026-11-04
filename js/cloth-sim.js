@@ -245,8 +245,11 @@ window.initFlagsterCloth = function(canvasId, heroId, initialSrc) {
   for (let row = 0; row < ROWS; row++) {
     for (let col = 0; col < COLS; col++) {
       const i = row * COLS + col;
-      texCoords[2 * i] = col / 45.0;
-      texCoords[2 * i + 1] = 1.0 - row / 41.0;
+      // Inset UV coordinates by 0.8% to avoid edge bleeding and white boundary sampling
+      const u = 0.008 + (col / 45.0) * 0.984;
+      const v = 0.008 + (1.0 - row / 41.0) * 0.984;
+      texCoords[2 * i] = u;
+      texCoords[2 * i + 1] = v;
     }
   }
 
@@ -505,6 +508,8 @@ window.initFlagsterCloth = function(canvasId, heroId, initialSrc) {
         offCanvas.width = 1024;
         offCanvas.height = 1024;
         const ctx = offCanvas.getContext('2d');
+        ctx.fillStyle = '#090a0d';
+        ctx.fillRect(0, 0, 1024, 1024);
         ctx.drawImage(img, 0, 0, 1024, 1024);
         uploadSource = offCanvas;
       }
@@ -557,15 +562,9 @@ window.initFlagsterCloth = function(canvasId, heroId, initialSrc) {
     aspectRatio = heroWidth / heroHeight;
     const isWide = heroWidth >= 1100 && aspectRatio >= 1.25;
 
-    if (isWide) {
-      cx = 0.38;
-      cy = 0.485;
-      zoom = Math.min(1.0, 0.58 * aspectRatio / (CW * 1.12));
-    } else {
-      cx = 0.5;
-      cy = (aspectRatio < 0.75) ? 0.36 : 0.40;
-      zoom = Math.min(1.0, 0.88 * aspectRatio / (CW * 1.12), ((aspectRatio < 0.75) ? 0.55 : 0.62) / CH);
-    }
+    cx = 0.5;
+    cy = (aspectRatio < 0.85) ? 0.44 : 0.47;
+    zoom = Math.min(1.0, 0.82 * aspectRatio / (CW * 1.08), 0.78 / CH);
   }
 
   window.addEventListener('resize', updateView);
