@@ -1,47 +1,50 @@
-# Flagster — Statement Wall Tapestries & Flags
+# 🏴 FLAGSTER — Wall Drip For Your Sanctuary
 
-Flagster is a complete e-commerce brand website for statement wall tapestries and album flags, featuring a **real-time WebGL 1 3D interactive cloth simulator** with dynamic flag switching and pure studio lighting.
+Official e-commerce website for **FLAGSTER**, inspired by streetwear brands like [PhewMew](https://www.phewmew.in/) and [PinkMatter](https://pinkmatter.shop/). Built with modern design engineering playbooks (Impeccable, Apple Design, Taste, UI UX Pro Max).
 
-All tapestries are priced at **₹500 (50% OFF, MRP ₹1,000)**.
+---
 
-Live repository: **https://github.com/Maahirrrr/flagster**
+## ⚡ Live Features
 
-## Featured Drops (₹500 each)
+- **Real-Time 3D WebGL Cloth Physics Hero**: Drag, tug, and swing the fabric with real-time Verlet physics and neutral studio lighting.
+- **Interactive Tapestry Switcher**: Live previews of any tapestry draped on the 3D cloth canvas.
+- **PhewMew / PinkMatter Style Product Detail Page (PDP)**:
+  - Dual view toggle: High-res print photo vs. interactive 3D cloth simulator.
+  - Size selectors: Small (3×2 ft ₹399), Medium (4×3 ft ₹500), Large (5×4 ft ₹699).
+  - Add to Cart with slide-in cart drawer + Wishlist button + Instant Buy Now.
+  - Authentic accordion information sections (`HOW TO INSTALL / APPLY`, `MATERIAL & CARE`, `SHIPPING & PACKAGING`).
+  - Trust badges: 3-5 days Pan-India delivery, 100% secure checkout, fade-proof thermal dye.
+- **Persistent Shopping Cart (`localStorage`)**:
+  - Slide-in side drawer.
+  - Free shipping progress bar (Free delivery over ₹499).
+  - Discount coupon input (`FLAGSTER10` for 10% extra off).
+  - Complete checkout modal with Cash on Delivery (COD), UPI QR simulation, and Card payments.
+- **Multi-Page Experience**:
+  - `index.html`: Hero with interactive 3D cloth, feature marquee, trending drops, 30s hang guide, and customer wall showcase.
+  - `shop.html`: Catalog with category filtering (Hip-Hop, Street Drip, Psychedelic, Typography), search bar, and sort selector.
+  - `product.html`: Dynamic PDP loading each tapestry by URL parameter (`?id=pnd`, `?id=music`, etc.).
+  - `faq.html`: How to hang visual guide (pushpins, hooks, grommets) and brand policies.
+  - `contact.html`: Live order tracking simulation and direct WhatsApp support.
 
-1. **MUSIC IS MY DR★G Tapestry** (Street & Culture)
-2. **Hardstone Psycho Rider Tapestry** (Street & Culture)
-3. **Tame Impala — Currents Tapestry** (Psychedelic & Indie)
-4. **Kendrick Lamar — DAMN. Tapestry** (Hip-Hop & Rap)
-5. **Travis Scott — Circus Maximus / Utopia Tapestry** (Hip-Hop & Rap)
-6. **Playboi Carti — Whole Lotta Red Tapestry** (Hip-Hop & Rap)
+---
 
-## Features
+## 🏷️ Products & Pricing
 
-- **Interactive 3D Hanging Flag Studio**:
-  - Live physics cloth simulation with Verlet integration, dual-corner pin hanging, flutter gusts, and momentum throw.
-  - Interactive Flag Selector: click any product thumbnail or "3D View" on product cards to dynamically re-texture the real-time 3D cloth!
-  - 4-corner brass grommets aligned with physical mounting points.
-- **E-Commerce Functionality**:
-  - Category filters: *All Flags*, *Hip-Hop & Rap*, *Street & Culture*, *Psychedelic & Indie*.
-  - Slide-in Cart Drawer with quantity adjustment, free shipping calculator, and subtotal calculation.
-  - Interactive Checkout Modal supporting Cash on Delivery (COD), UPI / GPay, and Cards.
-  - Instant order confirmation flow.
-- **Craftsmanship & Specs**:
-  - 180GSM heavyweight micro-weave polyester canvas.
-  - 4 pre-installed corner brass grommets for easy thumbtack/hook hanging.
-  - Thermal sublimation print with rich contrast and fade resistance.
-- **Zero Dependencies**:
-  - Pure HTML, CSS, JavaScript, and WebGL 1.
-  - Works immediately across desktop and mobile devices.
+Every statement flag is priced at **₹500** (Flat 50% discount from ₹1,000 MRP):
 
-## Local Usage
+1. **Dreamin PartyNextDoor Cover Tapestry** (`pnd`) — Hip-Hop
+2. **MUSIC IS MY DR★G Tapestry** (`music`) — Typography
+3. **Hardstone Psycho Rider Tapestry** (`hardstone`) — Street Drip
+4. **Tame Impala — Currents Tapestry** (`currents`) — Psychedelic
+5. **Kendrick Lamar — DAMN. Tapestry** (`damn`) — Hip-Hop
+6. **Travis Scott — Circus Maximus Tapestry** (`travis-utopia`) — Hip-Hop
+7. **Playboi Carti — Whole Lotta Red Tapestry** (`carti`) — Hip-Hop
+8. **Strange By Design — Chrome Octopus Tapestry** (`strange`) — Psychedelic
 
-Open `index.html` in any web browser or serve with a static server:
+---
 
-```bash
-# Python 3
-python3 -m http.server 8000
+## 🚀 Technologies
 
-# or Node.js npx serve
-npx serve .
-```
+- Native WebGL 1 shader pipeline with zero external libraries.
+- Vanilla JavaScript & CSS custom properties for lightweight, zero-dependency, instant loading.
+- Responsive across mobile (375px+), tablet, and ultrawide desktop displays.
