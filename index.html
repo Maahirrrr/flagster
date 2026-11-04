@@ -15,8 +15,8 @@
       --paper-edge: #cfd1d9;
       --ink: #000000;
       --ink-soft: rgba(0,0,0,0.5);
-      --violet: #5b07fb;
-      --violet-deep: #4a00d6;
+      --violet: #000000;
+      --violet-deep: #222222;
       --white: #ffffff;
       --gutter: clamp(20px, 3.2vw, 46px);
       --display: clamp(44px, min(7.65vw, 13.6vh), 168px);
@@ -665,7 +665,7 @@
           if (u_hasTexture > 0.5) {
             printCol = pow(texture2D(u_texture, v_uv).rgb, vec3(2.2));
           } else {
-            printCol = vec3(0.10, 0.02, 0.32);
+            printCol = vec3(0.05, 0.05, 0.05);
           }
 
           float shade = 0.46 + 0.68 * nl + 0.08 * n.y;
@@ -675,9 +675,7 @@
           float side = boxLight(Rf, normalize(vec3(0.86, 0.12, 0.50)), vec2(0.06, 0.85), 0.20);
           float fill = boxLight(Rf, KEY, vec2(0.42, 0.30), 0.35);
 
-          float phase = 3.0 * (0.85 * dot(n.xy, vec2(0.6, 0.8)) + 0.75 * (1.0 - nv) + 0.3 * dot(Rf.xy, vec2(-0.8, 0.6))) + 0.4 * sin(5.0 * v_uv.x + 7.0 * v_uv.y);
-          vec3 rainbow = clamp(vec3(0.74, 0.58, 0.96) + vec3(0.26, 0.24, 0.10) * cos(2.0 * PI * (vec3(phase) + vec3(0.0, 0.28, 0.62))), 0.0, 1.0);
-          vec3 holo = mix(vec3(1.0), pow(rainbow, vec3(2.2)), 0.8);
+          vec3 holo = vec3(1.0);
 
           float lum = dot(printCol, vec3(0.2126, 0.7152, 0.0722));
           float gloss = mix(1.0, 0.45, smoothstep(0.55, 0.9, lum));
@@ -686,8 +684,8 @@
           vec3 colour = printCol * shade + spec + holo * printCol * 0.6 * pow(1.0 - nv, 3.0);
 
           if (back) {
-            vec3 foil = vec3(0.30, 0.22, 0.52) * (0.35 + 0.9 * nl) + spec * 1.3;
-            colour = mix(foil, printCol * shade, 0.38);
+            vec3 backFabric = vec3(0.12, 0.12, 0.13) * (0.35 + 0.9 * nl) + spec * 0.7;
+            colour = mix(backFabric, printCol * shade, 0.42);
           }
 
           colour = min(colour, vec3(0.8)) + vec3(0.2) * (vec3(1.0) - exp(-max(colour - vec3(0.8), vec3(0.0)) / 0.2));
