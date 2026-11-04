@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Subtle brutalist geometry and gradients if needed -->
+    <clipPath id="flag-clip">
+      <rect x="56" y="76" width="400" height="360" rx="20" />
+    </clipPath>
+  </defs>
+
+  <!-- Dark Background Plate for standalone preview -->
+  <rect width="512" height="512" rx="32" fill="#090a0d" />
+
+  <!-- Outer Flag Silhouette -->
+  <rect x="56" y="76" width="400" height="360" rx="16" fill="#141722" stroke="#ffffff" stroke-width="8" />
+
+  <!-- 4 Corner Brass Grommets (Eyelets) -->
+  <!-- Top Left -->
+  <circle cx="96" cy="116" r="18" fill="#ffadc6" />
+  <circle cx="96" cy="116" r="8" fill="#090a0d" />
+  <!-- Top Right -->
+  <circle cx="416" cy="116" r="18" fill="#ffadc6" />
+  <circle cx="416" cy="116" r="8" fill="#090a0d" />
+  <!-- Bottom Left -->
+  <circle cx="96" cy="396" r="18" fill="#ffadc6" />
+  <circle cx="96" cy="396" r="8" fill="#090a0d" />
+  <!-- Bottom Right -->
+  <circle cx="416" cy="396" r="18" fill="#ffadc6" />
+  <circle cx="416" cy="396" r="8" fill="#090a0d" />
+
+  <!-- Center Brutalist Flagster Star -->
+  <!-- 4-point Diamond Star with razor cuts -->
+  <path d="M 256 120 
+           C 256 195, 275 225, 390 256 
+           C 275 287, 256 317, 256 392 
+           C 256 317, 237 287, 122 256 
+           C 237 225, 256 195, 256 120 Z" 
+        fill="#ffffff" />
+
+  <!-- Center Grommet Cutout -->
+  <circle cx="256" cy="256" r="16" fill="#090a0d" />
+  <circle cx="256" cy="256" r="10" fill="#ffadc6" />
+</svg>

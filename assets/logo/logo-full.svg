@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 240" width="1000" height="240">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@900&amp;display=swap');
+      .brand-title {
+        font-family: 'Work Sans', 'Helvetica Neue', Arial, sans-serif;
+        font-weight: 900;
+        font-size: 88px;
+        letter-spacing: -0.05em;
+        fill: #ffffff;
+      }
+      .brand-sub {
+        font-family: 'Work Sans', 'Helvetica Neue', Arial, sans-serif;
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: 0.18em;
+        fill: #8e95a5;
+        text-transform: uppercase;
+      }
+      .badge-text {
+        font-family: 'Work Sans', 'Helvetica Neue', Arial, sans-serif;
+        font-weight: 800;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        fill: #000000;
+      }
+    </style>
+  </defs>
+
+  <!-- Left: Logomark (Flag with grommets & star) -->
+  <g transform="translate(20, 20) scale(0.39)">
+    <!-- Outer Flag Canvas -->
+    <rect x="56" y="76" width="400" height="360" rx="20" fill="#141722" stroke="#ffffff" stroke-width="12" />
+
+    <!-- 4 Grommets -->
+    <circle cx="106" cy="126" r="22" fill="#ffadc6" />
+    <circle cx="106" cy="126" r="10" fill="#090a0d" />
+    <circle cx="406" cy="126" r="22" fill="#ffadc6" />
+    <circle cx="406" cy="126" r="10" fill="#090a0d" />
+    <circle cx="106" cy="386" r="22" fill="#ffadc6" />
+    <circle cx="106" cy="386" r="10" fill="#090a0d" />
+    <circle cx="406" cy="386" r="22" fill="#ffadc6" />
+    <circle cx="406" cy="386" r="10" fill="#090a0d" />
+
+    <!-- Center 4-Point Star -->
+    <path d="M 256 120 
+             C 256 195, 275 225, 390 256 
+             C 275 287, 256 317, 256 392 
+             C 256 317, 237 287, 122 256 
+             C 237 225, 256 195, 256 120 Z" 
+          fill="#ffffff" />
+    <circle cx="256" cy="256" r="16" fill="#ffadc6" />
+  </g>
+
+  <!-- Right: Wordmark -->
+  <text x="240" y="132" class="brand-title">FLAGSTER</text>
+
+  <!-- Badge: ORIGINALS -->
+  <rect x="730" y="76" width="104" height="28" rx="14" fill="#ffadc6" />
+  <text x="746" y="95" class="badge-text">ORIGINALS</text>
+
+  <!-- Subtitle: WALL DRIP · EST. 2026 -->
+  <text x="244" y="176" class="brand-sub">WALL DRIP · UNUSUAL BY INTENT · EST. 2026</text>
+</svg>
